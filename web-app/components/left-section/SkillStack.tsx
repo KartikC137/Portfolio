@@ -29,7 +29,7 @@ export default function SkillStackBox() {
   const [filter, setFilter] =
     useState<keyof typeof techStack>("BLOCKCHAIN/WEB3");
   return (
-    <div className="mt-2 p-4 border-deg2 bg-deg1 text-[var(--background)]">
+    <div className="mt-2 p-4 border-deg3 bg-deg2 text-deg0">
       <p className="text-2xl font-sans">
         Acquired Skills/ Development Experience
       </p>
@@ -38,8 +38,8 @@ export default function SkillStackBox() {
       </label>
       <nav
         id="filter-nav"
-        className="grid grid-flow-col bg-deg2 text-center font-mono font-[500] rounded-t-sm border-2 
-        *:p-1 *:border-r-2 *:last:border-none *:border-[var(--background)] "
+        className="grid grid-flow-col bg-deg3 text-center font-mono font-[500] rounded-t-sm border-2 
+        *:p-1 *:border-r-2 *:last:border-none *:border-deg0"
       >
         {Object.keys(techStack).map((c) => (
           <button
@@ -48,8 +48,8 @@ export default function SkillStackBox() {
             className={`transition-all ease-in-out duration-300
               ${
                 filter === c
-                  ? "bg-[var(--background)] text-deg2 font-[600]"
-                  : "hover:bg-deg0 hover:font-[600]"
+                  ? "bg-deg0 text-deg3 font-[600]"
+                  : "hover:bg-deg1 hover:font-[600]"
               }
             `}
           >
@@ -57,11 +57,11 @@ export default function SkillStackBox() {
           </button>
         ))}
       </nav>
-      <div className="min-h-[160px] my-1 pl-2 py-2 bg-deg2 border-2 rounded-b-sm text-lg text-deg3">
+      <div className="min-h-[160px] my-1 pl-2 py-2 bg-deg3 border-2 rounded-b-sm text-lg">
         {Object.entries(techStack[filter]).map(([k, v]) => (
-          <p>
+          <p key={k}>
             <span className="mr-2 font-sans">{k}</span>
-            <span className="px-2 rounded-sm font-[600] font-mono bg-deg1">
+            <span className="px-2 rounded-sm font-[600] font-mono bg-deg2">
               {v}
             </span>
           </p>
@@ -73,10 +73,10 @@ export default function SkillStackBox() {
       {/* TODO: add the rest  */}
       <div
         id="other-skills-box"
-        className="pl-2 py-2 bg-deg2 border-2 rounded-sm text-lg text-deg3"
+        className="pl-2 py-2 bg-deg3 border-2 rounded-sm text-lg text-deg0"
       >
         <span className="mr-2 font-sans">Languages: </span>
-        <span className="px-2 rounded-sm font-[600] font-mono bg-deg1">
+        <span className="px-2 rounded-sm font-[600] font-mono bg-deg2">
           English, Japanese(N5), Hindi, Kannada, Marathi
         </span>
       </div>

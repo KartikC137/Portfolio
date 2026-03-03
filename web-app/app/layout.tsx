@@ -28,11 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`h-screen grid grid-cols-[1fr_2fr] py-6
+        className={`h-screen grid grid-cols-[1fr_2fr] py-6 
                     ${calistogaSans.variable} ${ibmMono.variable} antialiased overflow-none`}
       >
         {/* Left Section */}
-        <section className="px-4 *:border-4 *:rounded-md ">
+        <section className="px-4 *:border-4 ">
           <SummaryBox />
           <SkillStackBox />
           <UnderTheHood opened={false} />

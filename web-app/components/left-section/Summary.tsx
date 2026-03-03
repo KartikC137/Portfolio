@@ -1,6 +1,6 @@
 export default function SummaryBox() {
   return (
-    <div className="relative p-4 border-deg1 bg-deg0 text-[var(--background)]">
+    <div className="relative p-4 rounded-t-sm border-deg2 bg-deg1 text-deg0">
       <p className="absolute top-0 right-4 text-lg font-mono font-[600]">
         Pune, India 411046
       </p>

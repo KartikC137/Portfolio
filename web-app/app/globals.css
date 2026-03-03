@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #450000;
-  --deg0: #f48080;
-  --deg1: #f4b4b4;
-  --deg2: #ffd5d5;
+  --deg0: #450000;
+  --deg1: #f48080;
+  --deg2: #f4b4b4;
+  --deg3: #ffd5d5;
   --foreground: #ffffff;
 }
 
 @theme {
-  --color-background: var(--background);
   --color-deg0: var(--deg0);
   --color-deg1: var(--deg1);
   --color-deg2: var(--deg2);
+  --color-deg3: var(--deg3);
   --color-foreground: var(--foreground);
 }
 
 body {
-  background: var(--background);
+  background: var(--deg0);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
