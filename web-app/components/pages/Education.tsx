@@ -1,5 +1,6 @@
 "use client";
 
+import { url } from "inspector";
 import { useState, WheelEvent } from "react";
 
 interface EducationPageProps {
@@ -22,6 +23,7 @@ const education = {
     "Current CGPA": 8.4, //calcalute correct value
   },
 };
+const certicateTags = { fcc: ["React", "Redux", "HTML,CSS/SCSS,JS", "Jquery"] };
 const certificateBoxes = ["a", "b", "c"];
 export default function EducationPage({ isActive }: EducationPageProps) {
   if (!isActive) {
@@ -98,38 +100,86 @@ export default function EducationPage({ isActive }: EducationPageProps) {
         className={`grid 
            ${certificateBox === "a" ? "grid-cols-[7fr_1fr_1fr] " : certificateBox === "b" ? "grid-cols-[1fr_7fr_1fr]" : "grid-cols-[1fr_1fr_7fr]"}
             transition-all duration-500 *:transition-all *:duration-300
-            *:p-2 gap-x-2 *:h-[390px]`}
+            *:p-2 gap-x-2 h-[340px]`}
       >
         {/* 1. FCC */}
         <div
           onClick={() => {
             certificateBox !== "a" && setCertificateBox("a");
           }}
-          className={`*:p-1 rounded-l-sm ${certificateBox === "a" ? "text-2xl bg-deg3 border-2 border-deg1" : "text-deg3! text-xl bg-deg1"}`}
+          className={`*:p-1 rounded-l-sm border-2 ${certificateBox === "a" ? "text-2xl bg-deg3 border-deg1" : "text-deg3! text-xl bg-deg1 border-deg2"}`}
         >
-          <div>
-            <span className="">Front end</span>
-          </div>
+          {certificateBox === "a" ? (
+            <div className="grid grid-cols-2 gap-x-2">
+              <div className="flex flex-col">
+                <div
+                  className="flex flex-row gap-x-1 text-sm/3 font-mono font-[600] 
+                              *:bg-deg2 *:border-2 *:rounded-full *:p-1 *:flex *:items-center"
+                >
+                  {certicateTags.fcc.map((e) => (
+                    <div key={e}>{e}</div>
+                  ))}
+                </div>
+                <img className="mt-2" src="/fcc.png" />
+              </div>
+              <div className="border-2"></div>
+            </div>
+          ) : (
+            <p>Front-end libraries</p>
+          )}
+          <div></div>
         </div>
         <div
           onClick={() => {
             certificateBox !== "b" && setCertificateBox("b");
           }}
-          className={
-            certificateBox === "b"
-              ? "text-2xl bg-deg3 border-2 border-deg1"
-              : "text-deg3! text-xl bg-deg1"
-          }
+          className={`*:p-1 rounded-l-sm border-2 ${certificateBox === "b" ? "text-2xl bg-deg3 border-deg1" : "text-deg3! text-xl bg-deg1 border-deg2"}`}
         >
-          <p>{certificateBox === "b" && "2. "}Google Cyber-Security</p>
+          {certificateBox === "b" ? (
+            <div className="grid grid-cols-2 gap-x-2">
+              <div className="flex flex-col">
+                <div
+                  className="flex flex-row gap-x-1 text-sm/3 font-mono font-[600] 
+                              *:bg-deg2 *:border-2 *:rounded-full *:p-1 *:flex *:items-center"
+                >
+                  {certicateTags.fcc.map((e) => (
+                    <div key={e}>{e}</div>
+                  ))}
+                </div>
+                <img className="mt-2" src="/cybersec.png" />
+              </div>
+              <div className="border-2"></div>
+            </div>
+          ) : (
+            <p>Google Cyber-Security</p>
+          )}
+          <div></div>
         </div>
         <div
           onClick={() => {
             certificateBox !== "c" && setCertificateBox("c");
           }}
-          className={`rounded-r-sm ${certificateBox === "c" ? "text-2xl bg-deg3 border-2 border-deg1" : "text-deg3! text-xl bg-deg1"}`}
+          className={`*:p-1 rounded-l-sm border-2 ${certificateBox === "c" ? "text-2xl bg-deg3 border-deg1" : "text-deg3! text-xl bg-deg1 border-deg2"}`}
         >
-          <p>{certificateBox === "c" && "3. "} AstroTech</p>
+          {certificateBox === "c" ? (
+            <div className="grid grid-cols-2 gap-x-2">
+              <div className="flex flex-col">
+                <div
+                  className="flex flex-row gap-x-1 text-sm/3 font-mono font-[600] 
+                              *:bg-deg2 *:border-2 *:rounded-full *:p-1 *:flex *:items-center"
+                >
+                  {certicateTags.fcc.map((e) => (
+                    <div key={e}>{e}</div>
+                  ))}
+                </div>
+                <img className="mt-2" src="/astro.png" />
+              </div>
+              <div className="border-2"></div>
+            </div>
+          ) : (
+            <p>AstroTech</p>
+          )}
+          <div></div>
         </div>
       </div>
       <p className="mt-2 select-none text-3xl font-sans">
