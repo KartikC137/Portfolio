@@ -15,9 +15,9 @@ export default function Home() {
   const activePageStyle =
     "z-100 absolute bottom-0 w-[1013px] h-[853px] text-deg0! border-deg0 pt-4";
   const middlePageStyle =
-    "z-99 absolute bottom-9 hover:bottom-18 hover:pt-3 left-14 w-[1020px] h-[860px]";
+    "z-99 absolute bottom-9 hover:bottom-18 hover:pt-3 left-11 w-[1020px] h-[860px]";
   const lastPageStyle =
-    "z-98 absolute bottom-18 hover:bottom-24 hover:pt-3  left-28 w-[1027px] h-[867px]";
+    "z-98 absolute bottom-18 hover:bottom-24 hover:pt-3 left-21 w-[1027px] h-[867px]";
 
   const setExcludedStyle = (toExclude: string) => {
     Object.entries(pages).map(([e, s]) => {
@@ -41,7 +41,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative ml-10 font-sans *:px-4 *:border-4 *:rounded-sm *:transition-all *:duration-500 *:ease-in-out">
+    <div className="overflow-y-hidden relative ml-4 font-sans *:px-4 *:border-4 *:rounded-sm *:transition-all *:duration-500 *:ease-in-out">
       <div
         id="page-a"
         onClick={() => {

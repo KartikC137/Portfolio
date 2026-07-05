@@ -1,6 +1,5 @@
 "use client";
 
-import { url } from "inspector";
 import { useState, WheelEvent } from "react";
 
 interface EducationPageProps {
@@ -35,12 +34,17 @@ export default function EducationPage({ isActive }: EducationPageProps) {
   }
 
   const [certificateBox, setCertificateBox] = useState<string>("a");
+  const isCertBoxA = certificateBox === "a";
+  const isCertBoxB = certificateBox === "b";
+  const isCertBoxC = certificateBox === "c";
 
+  const activeStyle = "grid grid-cols-2 bg-deg3 border-deg1";
+  const inactiveStyle = "text-deg3 bg-deg1 border-deg2";
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
     if (e.deltaY > 0) {
-      certificateBox === "a" ? setCertificateBox("b") : setCertificateBox("c");
+      isCertBoxA ? setCertificateBox("b") : setCertificateBox("c");
     } else if (e.deltaY < 0) {
-      certificateBox === "c" ? setCertificateBox("b") : setCertificateBox("a");
+      isCertBoxC ? setCertificateBox("b") : setCertificateBox("a");
     }
   };
 
@@ -97,45 +101,78 @@ export default function EducationPage({ isActive }: EducationPageProps) {
       {/* Certificates box */}
       <div
         onWheel={handleWheel}
-        className={`grid 
-           ${certificateBox === "a" ? "grid-cols-[7fr_1fr_1fr] " : certificateBox === "b" ? "grid-cols-[1fr_7fr_1fr]" : "grid-cols-[1fr_1fr_7fr]"}
+        className={`overflow-hidden grid
+           ${isCertBoxA ? "grid-cols-[7fr_1fr_1fr] " : isCertBoxB ? "grid-cols-[1fr_7fr_1fr]" : "grid-cols-[1fr_1fr_7fr]"}
             transition-all duration-500 *:transition-all *:duration-300
-            *:p-2 gap-x-2 h-[340px]`}
+            *:p-2 gap-x-2 h-[250px]`}
       >
         {/* 1. FCC */}
         <div
           onClick={() => {
             certificateBox !== "a" && setCertificateBox("a");
           }}
-          className={`*:p-1 rounded-l-sm border-2 ${certificateBox === "a" ? "text-2xl bg-deg3 border-deg1" : "text-deg3! text-xl bg-deg1 border-deg2"}`}
+          className={`rounded-l-sm border-2 ${isCertBoxA ? activeStyle : inactiveStyle}`}
         >
-          {certificateBox === "a" ? (
-            <div className="grid grid-cols-2 gap-x-2">
-              <div className="flex flex-col">
+          <div>
+            <p className="text-xl/6 flex items-center gap-x-1">
+              Front-end libraries{" "}
+              {isCertBoxA && (
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.55556 14C1.12778 14 0.761574 13.8477 0.456944 13.5431C0.152315 13.2384 0 12.8722 0 12.4444V1.55556C0 1.12778 0.152315 0.761574 0.456944 0.456944C0.761574 0.152315 1.12778 0 1.55556 0H7V1.55556H1.55556V12.4444H12.4444V7H14V12.4444C14 12.8722 13.8477 13.2384 13.5431 13.5431C13.2384 13.8477 12.8722 14 12.4444 14H1.55556ZM5.21111 9.87778L4.12222 8.78889L11.3556 1.55556H8.55556V0H14V5.44444H12.4444V2.64444L5.21111 9.87778Z"
+                    fill="#450000"
+                  />
+                </svg>
+              )}
+            </p>
+            <p className="text-base">
+              by freeCodeCamp{" "}
+              <span className="text-deg1 text-base/2">
+                (legacy certificate)
+              </span>
+            </p>
+
+            {isCertBoxA && (
+              <div className="mt-2 pl-2 ">
                 <div
                   className="flex flex-row gap-x-1 text-sm/3 font-mono font-[600] 
-                              *:bg-deg2 *:border-2 *:rounded-full *:p-1 *:flex *:items-center"
+                             *:h-6 *:bg-deg2 *:border-2 *:rounded-full *:p-1 *:flex *:items-center"
                 >
                   {certicateTags.fcc.map((e) => (
                     <div key={e}>{e}</div>
                   ))}
                 </div>
-                <img className="mt-2" src="/fcc.png" />
+                <p className="mt-2 overflow-hidden text-base/6 font-mono font-[700]">
+                  This course introduced me to React, and taught the essentials
+                  of JS and Jquery as well as using libraries and frameworks. I
+                  mainly focused on hooks, contexts and state management.
+                </p>
+                {/* <img className="mt-2" src="/fcc.png" /> */}
               </div>
-              <div className="border-2"></div>
+            )}
+          </div>
+          {isCertBoxA && (
+            <div>
+              <p className="text-deg1">Tasks completed for certificate:</p>
+              <div className="px-1 h-[200px] border-l-2 border-deg1">
+                <p>Complete 5 projects to achieve the certificate:</p>
+              </div>
             </div>
-          ) : (
-            <p>Front-end libraries</p>
           )}
-          <div></div>
         </div>
         <div
           onClick={() => {
             certificateBox !== "b" && setCertificateBox("b");
           }}
-          className={`*:p-1 rounded-l-sm border-2 ${certificateBox === "b" ? "text-2xl bg-deg3 border-deg1" : "text-deg3! text-xl bg-deg1 border-deg2"}`}
+          className={`*:p-1 rounded-l-sm border-2 ${isCertBoxB ? "text-2xl bg-deg3 border-deg1" : "text-deg3! text-xl bg-deg1 border-deg2"}`}
         >
-          {certificateBox === "b" ? (
+          {isCertBoxB ? (
             <div className="grid grid-cols-2 gap-x-2">
               <div className="flex flex-col">
                 <div
@@ -146,7 +183,7 @@ export default function EducationPage({ isActive }: EducationPageProps) {
                     <div key={e}>{e}</div>
                   ))}
                 </div>
-                <img className="mt-2" src="/cybersec.png" />
+                {/* <img className="mt-2" src="/cybersec.png" /> */}
               </div>
               <div className="border-2"></div>
             </div>
@@ -159,9 +196,9 @@ export default function EducationPage({ isActive }: EducationPageProps) {
           onClick={() => {
             certificateBox !== "c" && setCertificateBox("c");
           }}
-          className={`*:p-1 rounded-l-sm border-2 ${certificateBox === "c" ? "text-2xl bg-deg3 border-deg1" : "text-deg3! text-xl bg-deg1 border-deg2"}`}
+          className={`*:p-1 rounded-l-sm border-2 ${isCertBoxC ? "text-2xl bg-deg3 border-deg1" : "text-deg3! text-xl bg-deg1 border-deg2"}`}
         >
-          {certificateBox === "c" ? (
+          {isCertBoxC ? (
             <div className="grid grid-cols-2 gap-x-2">
               <div className="flex flex-col">
                 <div
@@ -172,7 +209,7 @@ export default function EducationPage({ isActive }: EducationPageProps) {
                     <div key={e}>{e}</div>
                   ))}
                 </div>
-                <img className="mt-2" src="/astro.png" />
+                {/* <img className="mt-2" src="/astro.png" /> */}
               </div>
               <div className="border-2"></div>
             </div>

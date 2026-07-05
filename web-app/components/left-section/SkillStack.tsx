@@ -29,10 +29,8 @@ export default function SkillStackBox() {
   const [filter, setFilter] =
     useState<keyof typeof techStack>("BLOCKCHAIN/WEB3");
   return (
-    <div className="mt-2 p-4 border-deg3 bg-deg2 text-deg0">
-      <p className="text-2xl font-sans">
-        Acquired Skills/ Development Experience
-      </p>
+    <div className="h-[530px] mt-2 p-4 border-deg3 bg-deg2 text-deg0">
+      <p className="text-3xl font-sans">Acquired Skills</p>
       <label htmlFor="filter-nav" className="font-mono font-[500]">
         Technical Skills
       </label>
@@ -57,11 +55,11 @@ export default function SkillStackBox() {
           </button>
         ))}
       </nav>
-      <div className="min-h-[160px] my-1 pl-2 py-2 bg-deg3 border-2 rounded-b-sm text-lg">
+      <div className="h-[280px] my-1 pl-2 py-2 bg-deg3 border-2 rounded-b-sm text-lg">
         {Object.entries(techStack[filter]).map(([k, v]) => (
           <p key={k}>
             <span className="mr-2 font-sans">{k}</span>
-            <span className="px-2 rounded-sm font-[600] font-mono bg-deg2">
+            <span className="px-2 rounded-sm font-[700] font-mono bg-deg2">
               {v}
             </span>
           </p>

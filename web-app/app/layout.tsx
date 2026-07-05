@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Calistoga, IBM_Plex_Mono } from "next/font/google";
+import { PinnedPagesProvider } from "@/hooks/PinnedPagesContext";
+import { ActivePageManager } from "@/components/ActivePageManager";
 import SummaryBox from "@/components/left-section/Summary";
 import SkillStackBox from "@/components/left-section/SkillStack";
-import UnderTheHood from "@/components/left-section/UnderTheHood";
+import RecentsMenu from "@/components/right-section/RecentsMenu";
+
 import "./globals.css";
 
 const calistogaSans = Calistoga({
@@ -27,18 +30,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`h-screen grid grid-cols-[1fr_2fr] py-6 
+      <PinnedPagesProvider>
+        <body
+          className={`relative h-screen grid grid-cols-[1.5fr_3.4fr_0.8fr] pl-4 py-4
                     ${calistogaSans.variable} ${ibmMono.variable} antialiased overflow-none`}
-      >
-        {/* Left Section */}
-        <section className="px-4 *:border-4 ">
-          <SummaryBox />
-          <SkillStackBox />
-          <UnderTheHood opened={false} />
-        </section>
-        {children}
-      </body>
+        >
+          {/* full page view */}
+          <ActivePageManager />
+          {/* Left Section */}
+          <section className="*:border-4 mt-3">
+            <SummaryBox />
+            <SkillStackBox />
+            {/* <UnderTheHood opened={false} /> */}
+          </section>
+          {children}
+          {/* Right Section */}
+          <section>
+            <RecentsMenu />
+          </section>
+        </body>
+      </PinnedPagesProvider>
     </html>
   );
 }

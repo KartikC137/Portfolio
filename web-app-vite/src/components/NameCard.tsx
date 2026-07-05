@@ -1,34 +1,15 @@
-export default function SummaryBox() {
+export default function NameCard() {
   return (
-    <div className="relative p-4 rounded-t-sm border-deg2 bg-deg1 text-deg0 h-[350px]">
-      <p className="absolute top-0 right-4 text-base font-mono font-[600]">
-        Pune, India 411046
-      </p>
-      <p className="mt-2 text-[40px]/10 font-sans">Kartik Kumbhar</p>
-      {/* quick contact info */}
-      <p className="flex items-center text-xl font-mono font-[600] border-b-2">
-        <span className="mr-2">kartikininterstice@gmail.com</span>
-        <svg
-          width="17"
-          height="20"
-          viewBox="0 0 17 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
-            fill="#450000"
-          />
-        </svg>
-      </p>
-      {/* The elevator pitch */}
-      <p className="py-2 text-xl font-mono font-[600] text-foreground">
-        A fullstack blockchain dev. and a graduating computer engineering
-        student. Experienced in writing smart contracts in solidity, Building
-        relational DB, Designing UI/UX via personal projects.
-      </p>
+    <>
+      {/* <div
+        className="absolute top-33 right-[-85px] rotate-90 py-1 px-3 
+       rounded-t-lg bg-deg3 text-lg font-mono font-bold text-deg0"
+      >
+        CONTACT ME
+      </div> */}
+
       {/* <p className="text-3xl font-sans">Interested in me?</p> */}
-      <div className="mt-2 flex flex-row justify-end gap-x-2 text-lg font-sans">
+      <div className="flex flex-row justify-end gap-x-2 text-lg font-sans">
         {/* telegram */}
         <p>
           <svg
@@ -72,17 +53,17 @@ export default function SummaryBox() {
           </svg>
           {/* <span>kartik_o</span> */}
           {/* <svg
-            width="17"
-            height="20"
-            viewBox="0 0 17 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
-              fill="#450000"
-            />
-          </svg> */}
+      width="17"
+      height="20"
+      viewBox="0 0 17 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
+        fill="#450000"
+      />
+    </svg> */}
         </p>
         {/* discord */}
         <p>
@@ -101,18 +82,18 @@ export default function SummaryBox() {
           </svg>
 
           {/* <span>kartik47</span>
-          <svg
-            width="17"
-            height="20"
-            viewBox="0 0 17 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
-              fill="#450000"
-            />
-          </svg> */}
+    <svg
+      width="17"
+      height="20"
+      viewBox="0 0 17 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
+        fill="#450000"
+      />
+    </svg> */}
         </p>
         {/* linked in */}
         <p>
@@ -131,18 +112,18 @@ export default function SummaryBox() {
           </svg>
 
           {/* <span>kkC137</span>
-          <svg
-            width="17"
-            height="20"
-            viewBox="0 0 17 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
-              fill="#450000"
-            />
-          </svg> */}
+    <svg
+      width="17"
+      height="20"
+      viewBox="0 0 17 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
+        fill="#450000"
+      />
+    </svg> */}
         </p>
         {/* github */}
         <p>
@@ -172,18 +153,18 @@ export default function SummaryBox() {
             </defs>
           </svg>
           {/* <span>kartikC137</span>
-          <svg
-            width="17"
-            height="20"
-            viewBox="0 0 17 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
-              fill="#450000"
-            />
-          </svg> */}
+    <svg
+      width="17"
+      height="20"
+      viewBox="0 0 17 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
+        fill="#450000"
+      />
+    </svg> */}
         </p>
         {/* twitter */}
         <p>
@@ -202,18 +183,18 @@ export default function SummaryBox() {
           </svg>
 
           {/* <span>kartik_o</span>
-          <svg
-            width="17"
-            height="20"
-            viewBox="0 0 17 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
-              fill="#450000"
-            />
-          </svg> */}
+    <svg
+      width="17"
+      height="20"
+      viewBox="0 0 17 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 16C5.45 16 4.97917 15.8042 4.5875 15.4125C4.19583 15.0208 4 14.55 4 14V2C4 1.45 4.19583 0.979167 4.5875 0.5875C4.97917 0.195833 5.45 0 6 0H15C15.55 0 16.0208 0.195833 16.4125 0.5875C16.8042 0.979167 17 1.45 17 2V14C17 14.55 16.8042 15.0208 16.4125 15.4125C16.0208 15.8042 15.55 16 15 16H6ZM6 14H15V2H6V14ZM2 20C1.45 20 0.979167 19.8042 0.5875 19.4125C0.195833 19.0208 0 18.55 0 18V4H2V18H13V20H2Z"
+        fill="#450000"
+      />
+    </svg> */}
         </p>
 
         <svg
@@ -230,6 +211,6 @@ export default function SummaryBox() {
           />
         </svg>
       </div>
-    </div>
+    </>
   );
 }

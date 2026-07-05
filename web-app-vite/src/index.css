@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --deg0: #450000;
+  --deg1: #f48080;
+  --deg2: #f4b4b4;
+  --deg3: #ffd5d5;
+  --foreground: #ffffff;
+}
+
+@theme {
+  --font-sans: "Calistoga", serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --color-deg0: var(--deg0);
+  --color-deg1: var(--deg1);
+  --color-deg2: var(--deg2);
+  --color-deg3: var(--deg3);
+  --color-foreground: var(--foreground);
+}
+
+body {
+  background: var(--deg0);
+  color: var(--foreground);
+}

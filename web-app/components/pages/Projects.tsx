@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, WheelEvent } from "react";
+import { useRouter } from "next/navigation";
+import { usePinnedPages, validPins } from "@/hooks/PinnedPagesContext";
 
 interface ProjectsPageProps {
   isActive: boolean;
@@ -19,19 +21,39 @@ export default function ProjectsPage({ isActive }: ProjectsPageProps) {
     "tailwindcss",
   ];
   const web3ProjectBoxes = ["a", "b", "c"];
+
   const [web3ProjectBox, setWeb3ProjectBox] = useState<string>("a");
+  const { pinnedPages } = usePinnedPages();
+  const router = useRouter();
+
+  const isWeb3BoxA = web3ProjectBox === "a";
+  const isWeb3BoxB = web3ProjectBox === "b";
+  const isWeb3BoxC = web3ProjectBox === "c";
+
+  const activeStyle = "text-2xl bg-deg1";
+  const inactiveStyle = "text-xl bg-deg2";
 
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
     if (e.deltaY > 0) {
-      web3ProjectBox === "a" ? setWeb3ProjectBox("b") : setWeb3ProjectBox("c");
+      isWeb3BoxA ? setWeb3ProjectBox("b") : setWeb3ProjectBox("c");
     } else if (e.deltaY < 0) {
-      web3ProjectBox === "c" ? setWeb3ProjectBox("b") : setWeb3ProjectBox("a");
+      isWeb3BoxC ? setWeb3ProjectBox("b") : setWeb3ProjectBox("a");
     }
   };
+
+  function handleExpand(page: validPins) {
+    if (pinnedPages.length > 0) {
+      const currentPins = pinnedPages.join(",");
+      router.push(`/?pinned=${currentPins}&active=${page}`);
+    } else {
+      router.push(`/?active=${page}`);
+    }
+  }
 
   return (
     <>
       <p className="select-none text-4xl">Projects</p>
+      {/* Web 3 projects*/}
       <div className="flex flex-row items-center">
         <p className="text-2xl font-[700]">WEB3 / Blockchain</p>
         <div
@@ -50,33 +72,49 @@ export default function ProjectsPage({ isActive }: ProjectsPageProps) {
           ))}
         </div>
         <div
-          className="ml-2 flex flex-row gap-x-1 text-sm/3 font-mono font-[600] 
-        *:border-2 *:rounded-full *:p-1 *:flex *:items-center"
+          className="ml-2 flex flex-row gap-x-1 text-sm/4 font-mono font-[600] 
+          *:border-deg2 *:bg-deg1 *:text-deg3 *:border-2 *:rounded-full *:p-1 *:flex *:items-center"
         >
           {web3CommonTech.map((e) => (
             <div key={e}>{e}</div>
           ))}
         </div>
       </div>
-      {/* Web 3 projects box*/}
       <div
         onWheel={handleWheel}
         className={`grid 
-           ${web3ProjectBox === "a" ? "grid-cols-[7fr_1fr_1fr] " : web3ProjectBox === "b" ? "grid-cols-[1fr_7fr_1fr]" : "grid-cols-[1fr_1fr_7fr]"}
+           ${isWeb3BoxA ? "grid-cols-[7fr_1fr_1fr] " : isWeb3BoxB ? "grid-cols-[1fr_7fr_1fr]" : "grid-cols-[1fr_1fr_7fr]"}
             transition-all duration-500 *:transition-all *:duration-300
-            *:p-2 gap-x-2 *:h-[390px]`}
+            overflow-hidden *:p-2 gap-x-2 *:h-[390px] *:relative`}
       >
         {/* 1. custody chain */}
         <div
           onClick={() => {
             web3ProjectBox !== "a" && setWeb3ProjectBox("a");
           }}
-          className={`*:p-1 rounded-l-sm ${web3ProjectBox === "a" ? "grid grid-cols-[5fr_4fr] text-2xl bg-deg1" : "text-xl bg-deg2"}`}
+          className={`*:p-1 rounded-l-sm ${isWeb3BoxA ? `grid grid-cols-[5fr_4fr] ${activeStyle}` : inactiveStyle}`}
         >
+          {/* expand */}
+          <span className="absolute top-0 right-0">
+            <svg
+              onClick={() => handleExpand("p_cc")}
+              width="25"
+              height="25"
+              viewBox="0 0 25 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="25" height="25" rx="12.5" fill="#450000" />
+              <path
+                d="M7.14286 17.8571H10.3571C10.6607 17.8571 10.9152 17.9598 11.1205 18.1652C11.3259 18.3705 11.4286 18.625 11.4286 18.9286C11.4286 19.2321 11.3259 19.4866 11.1205 19.692C10.9152 19.8973 10.6607 20 10.3571 20H6.07143C5.76786 20 5.51339 19.8973 5.30804 19.692C5.10268 19.4866 5 19.2321 5 18.9286V14.6429C5 14.3393 5.10268 14.0848 5.30804 13.8795C5.51339 13.6741 5.76786 13.5714 6.07143 13.5714C6.375 13.5714 6.62946 13.6741 6.83482 13.8795C7.04018 14.0848 7.14286 14.3393 7.14286 14.6429V17.8571ZM17.8571 7.14286H14.6429C14.3393 7.14286 14.0848 7.04018 13.8795 6.83482C13.6741 6.62946 13.5714 6.375 13.5714 6.07143C13.5714 5.76786 13.6741 5.51339 13.8795 5.30804C14.0848 5.10268 14.3393 5 14.6429 5H18.9286C19.2321 5 19.4866 5.10268 19.692 5.30804C19.8973 5.51339 20 5.76786 20 6.07143V10.3571C20 10.6607 19.8973 10.9152 19.692 11.1205C19.4866 11.3259 19.2321 11.4286 18.9286 11.4286C18.625 11.4286 18.3705 11.3259 18.1652 11.1205C17.9598 10.9152 17.8571 10.6607 17.8571 10.3571V7.14286Z"
+                fill="#FFD5D5"
+              />
+            </svg>
+          </span>
           <div>
             <span className="flex flex-row gap-x-2 items-center">
-              {web3ProjectBox === "a" && "1. "} Custody Chain
-              {web3ProjectBox === "a" && (
+              {isWeb3BoxA && "1. "} Custody Chain
+              {isWeb3BoxA && (
                 <>
                   <svg
                     width="18"
@@ -119,61 +157,65 @@ export default function ProjectsPage({ isActive }: ProjectsPageProps) {
               )}
             </span>
             <div
-              className={`flex items-center bg-deg3 ${web3ProjectBox === "a" ? "text-sm/3" : "text-sm/5 px-2"} font-mono font-[600] 
+              className={`flex items-center bg-deg3 ${isWeb3BoxA ? "text-sm/3" : "text-sm/5 px-2"} font-mono font-[600] 
                    border-2 rounded-full p-1 max-w-39`}
             >
               Digital Forensics
             </div>
             {/* todo: fix the rendering overflow */}
-            <div
-              className={`font-[600] text-sm  font-mono text-white overflow-hidden
-                ${web3ProjectBox === "a" ? "max-h-[305px]" : "hidden"}
-              `}
-            >
-              <p className="mt-2">
-                A blockchain based Decentralized Chain of custody manager. The
-                evidences are verifiable and all the transactions are
-                transparent, not owned by a single authority, hence can be
-                tested for integrity by anyone without revealing the actual
-                evidence data.
-              </p>
-              <p className="mt-2 text-xl font-sans text-deg3">Motivation</p>
-              <p className="">
-                One of the issues with traditional method of maintaining paper
-                trails is trust placed on supervisor.I wanted to make the
-                process systematic, transparent and verifiable while keeping the
-                evidence data confidential.This can greatly help prove evidence
-                relevance without the messy and lengthy paper documentations.
-              </p>
-            </div>
+            {isWeb3BoxA && (
+              <div className="text-base/6 font-mono font-[700] text-white overflow-hidden">
+                <p className="mt-2">
+                  A blockchain based Decentralized Chain of custody manager. The
+                  evidences are verifiable and all the transactions are
+                  transparent, not owned by a single authority, hence can be
+                  tested for integrity by anyone without revealing the actual
+                  evidence data.
+                </p>
+                <p className="mt-2 text-xl font-sans text-deg3">Motivation</p>
+                <p className="">
+                  One of the issues with traditional method of maintaining paper
+                  trails is trust placed on supervisor.I wanted to make the
+                  process systematic, transparent and verifiable while keeping
+                  the evidence data confidential.This can greatly help prove
+                  evidence relevance without the messy and lengthy paper
+                  documentations.
+                </p>
+              </div>
+            )}
           </div>
-          {web3ProjectBox === "a" && <div className="border"></div>}
+          {isWeb3BoxA && <div className="border-l-2">other stuff here</div>}
         </div>
+        {/* 2. People's Mandate */}
         <div
           onClick={() => {
             web3ProjectBox !== "b" && setWeb3ProjectBox("b");
           }}
-          className={
-            web3ProjectBox === "b" ? "text-2xl bg-deg1" : "text-xl bg-deg2"
-          }
+          className={isWeb3BoxB ? activeStyle : inactiveStyle}
         >
-          <p>{web3ProjectBox === "b" && "2. "}People’s Mandate</p>
+          <p>{isWeb3BoxB && "2. "}People’s Mandate</p>
         </div>
+        {/* 3. Misc */}
         <div
           onClick={() => {
             web3ProjectBox !== "c" && setWeb3ProjectBox("c");
           }}
-          className={`rounded-r-sm ${web3ProjectBox === "c" ? "text-2xl bg-deg1" : "text-xl bg-deg2"}`}
+          className={`rounded-r-sm ${isWeb3BoxC ? activeStyle : inactiveStyle}`}
         >
-          <p>{web3ProjectBox === "c" && "3. "} Misc. Foundry Projects</p>
+          <p>{isWeb3BoxC && "3. "} Misc. Foundry Projects</p>
         </div>
       </div>
+
+      {/* Other projects*/}
+
       <p className="mt-1 text-2xl">Other Projects</p>
-      <div className="grid grid-cols-[4fr_5fr] gap-x-2 h-[320px] text-2xl *:p-2 *:bg-deg1">
-        <div className="rounded-l-sm">
+      <div className="grid grid-cols-[6fr_1fr] gap-x-2 h-[320px] text-2xl *:p-2">
+        <div className="bg-deg1 rounded-l-sm">
           <p>1. Linux From Scratch (LFS)</p>
         </div>
-        <div className="rounded-r-sm"></div>
+        <div className="rounded-r-sm bg-deg2">
+          <p>2. React Projects (for front end libraries certificate)</p>
+        </div>
       </div>
     </>
   );
