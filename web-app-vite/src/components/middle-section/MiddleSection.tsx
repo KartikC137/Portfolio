@@ -2,7 +2,6 @@
 import ProjectsPage from "../pages/Projects";
 import MorePage from "../pages/MoreAboutMe";
 import EducationPage from "../pages/Education";
-import NameCard from "../NameCard";
 import { useEffect, useRef, useState } from "react";
 import {
   firstPageStyle,
@@ -32,17 +31,13 @@ export default function MiddleSection() {
   const pageARef = useRef<HTMLDivElement | null>(null);
   const pageBRef = useRef<HTMLDivElement | null>(null);
   const pageCRef = useRef<HTMLDivElement | null>(null);
-  const nameCardRef = useRef<HTMLDivElement | null>(null);
   const revealedRef = useRef(false);
 
-  // Refs for tracking state inside the Lenis scroll loop without causing re-renders
   const scrollRef = useRef<number>(0);
   const activePageRef = useRef<string>("a");
 
-  console.log("scroll", scrollRef);
   const [activePage, setActivePage] = useState<string>("a");
-  const [nameCardActive, setNameCardActive] = useState<boolean>(true);
-  const [footerActive, setFooterActive] = useState<boolean>(false);
+  const [footerActive, setFooterActive] = useState<boolean>(true);
   const [isAnimatingLayout, setIsAnimatingLayout] = useState<boolean>(false);
 
   const setExcludedStyle = (toExclude: string) => {
@@ -73,7 +68,6 @@ export default function MiddleSection() {
     if (revealedRef.current !== shouldReveal) {
       revealedRef.current = shouldReveal;
       setFooterActive(shouldReveal);
-      setNameCardActive(shouldReveal);
     }
   };
 
@@ -96,35 +90,9 @@ export default function MiddleSection() {
     };
   }, []);
 
-  // name card fly
-  useEffect(() => {
-    const el = nameCardRef.current;
-
-    if (!el) return;
-
-    el.style.transform = "translateX(850px)";
-
-    const timeout1 = setTimeout(() => {
-      requestAnimationFrame(() => {
-        el.style.transform = "translateX(0)";
-      });
-    }, 300);
-
-    const timeout2 = setTimeout(() => {
-      requestAnimationFrame(() => {
-        el.style.zIndex = nameCardActive ? "102" : "97";
-      });
-    }, 100);
-
-    return () => {
-      clearTimeout(timeout1);
-      clearTimeout(timeout2);
-    };
-  }, [nameCardActive]);
-
   function handlePageClick(page: string) {
     if (page === activePage) return;
-
+    if (!revealedRef.current && footerActive) setFooterActive(false);
     setActivePage(page);
     setIsAnimatingLayout(true);
     setExcludedStyle(page);
@@ -175,32 +143,16 @@ export default function MiddleSection() {
         <MorePage />
       </div>
 
-      {/* Name Card */}
-      {/* <div
-        ref={nameCardRef}
-        onClick={() => setNameCardActive(!nameCardActive)}
-        className={`
-       fixed bottom-10 right-13
-       p-4
-       w-145
-       text-white rounded-xl
-       border-deg3 shadow-lg shadow-deg0 bg-deg0
-       transition-all duration-500 ease-in-out
-  `}
-      >
-        <NameCard />
-      </div> */}
-
       <div
         onClick={() => !revealedRef.current && setFooterActive(!footerActive)}
         className={`
-          z-[101] fixed bottom-10 left-5 h-45 p-4
-           backdrop-blur-sm rounded-lg border-2 
-          transition-all duration-500 ease-in-out 
+          z-[101] fixed bottom-6 left-5 h-50 p-4 
+          backdrop-blur-sm rounded-lg border-2 
+          transition-all duration-700 ease-in-out 
           ${footerActive ? "text-deg2 bg-deg0/80 border-deg3/80 w-[calc(100vw-4.8rem)]" : "w-90 border-deg0/70 text-deg0 bg-gradient-to-r from-deg2 to-deg2/70 "} 
         `}
       >
-        <Footer isActive={!footerActive} />
+        <Footer isActive={footerActive} />
       </div>
     </div>
   );
