@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-interface EducationPageProps {
-  isActive: boolean;
-}
 const education = {
   2020: {
     "High School": "ABPS, India",
@@ -21,6 +18,12 @@ const education = {
   },
 };
 const techStack = {
+  "FRONTEND & BACKEND": {
+    "Languages:": "JS, TypeScript, SQL, bash, PHP(basic), SCSS",
+    "Frameworks & Libraries:": "Next.js, React.js, Redux",
+    "Environment & DB:": "Node.js, Postgres",
+    "Tools & Utilities:": "Figma",
+  },
   "BLOCKCHAIN/WEB3": {
     "Languages & Frameworks:": "Solidity, Foundry, Hardhat",
     "Libraries & Standards:":
@@ -28,12 +31,7 @@ const techStack = {
     "Tools & Utilities:": "MetaMask, Remix, Etherscan, Geth",
     "Infrastructure:": "Alchemy, IPFS, zkSync (Layer 2)",
   },
-  "FRONTEND & BACKEND": {
-    "Languages:": "JS, TypeScript, SQL, bash, PHP(basic), SCSS",
-    "Frameworks & Libraries:": "Next.js, React.js, Redux",
-    "Environment & DB:": "Node.js, Postgres",
-    "Tools & Utilities:": "Figma",
-  },
+
   MISC: {
     "Languages:": "Python, Java, C",
     "Tools: ": "Git, GitHub, Linux, Windows",
@@ -43,10 +41,19 @@ const techStack = {
   },
 };
 
-// placeholder
-const certicateTags = { fcc: ["React", "Redux", "HTML,CSS/SCSS,JS", "Jquery"] };
-
-export default function EducationPage({ isActive }: EducationPageProps) {
+const certicateTags = {
+  fcc: ["React", "Redux", "HTML,CSS/SCSS,JS", "Jquery"],
+  googleCybersecurity: [
+    "Cybersecurity",
+    "Python",
+    "SQL",
+    "Linux",
+    "Network Security",
+    "SIEM / IDS",
+  ],
+  astro: ["Astronomy", "Space Technology", "Astrophysics", "Personal Interest"],
+};
+export default function EducationPage() {
   const [filter, setFilter] =
     useState<keyof typeof techStack>("BLOCKCHAIN/WEB3");
 
@@ -106,15 +113,13 @@ export default function EducationPage({ isActive }: EducationPageProps) {
           </span>
         </div>
       </div>
-
       {/* certifications */}
       <p className="my-8 ml-[-4px] font-mono font-[600] italic text-6xl">
         <span className="px-5 bg-deg3 rounded-r-full">Certifications</span>
       </p>
-
       {/* 1. fcc */}
       <div className="mx-[-5px] p-5 flex flex-rows justify-between bg-deg0 text-deg3">
-        <p className="text-4xl font-sans">1. Frontend Development Libraries</p>{" "}
+        <p className="text-4xl font-sans">1. Frontend Development Libraries</p>
         <div
           className="flex flex-row gap-x-1 text-xl/4
           *:border-deg0 *:bg-deg3 *:text-deg0 *:border-2 *:rounded-full *:px-2 *:flex *:items-center"
@@ -124,18 +129,74 @@ export default function EducationPage({ isActive }: EducationPageProps) {
           ))}
         </div>
       </div>
-      <div className="p-2 grid grid-cols-2 gap-x-2">
-        <img src="/fcc.png" />
-        <p className="text-xl font-sans font-[700]">
-          This course introduced me to React, and taught the essentials of JS
-          and Jquery as well as using libraries and frameworks. I mainly focused
-          on hooks, contexts and state management.
-        </p>
+      <div className="p-2 grid grid-cols-[1.2fr_1fr] gap-x-2">
+        <div className="relative w-full">
+          <img
+            className="w-full h-full object-cover object-top "
+            src="/fcc.png"
+            alt="Frontend Certificate"
+          />
+          <div className="absolute inset-0 shadow-[inset_0_-20px_50px_0px_theme(colors.deg0)] pointer-events-none"></div>
+        </div>
+        <div className="text-2xl font-sans bg-deg3 rounded-lg font-bold">
+          <ul className="flex flex-col items-center gap-y-6 list-disc py-6 pr-6 pl-10 text-justify">
+            <li>
+              Completed a comprehensive, 300-hour certification focused on
+              mastering modern front-end frameworks.
+            </li>
+            <li>
+              This coursework involved building responsive, interactive
+              single-page applications and managing complex state.
+            </li>
+          </ul>
+          <div className="px-4 pb-6 text-justify">
+            <span className="text-deg3 bg-deg0 px-3 rounded-lg">
+              Key Projects:
+            </span>{" "}
+            Random Quote Machine, Markdown Previewer, Drum Machine, JavaScript
+            Calculator, and a 25 + 5 Clock.
+          </div>
+        </div>
       </div>
-
       {/* 2. cybersec */}
       <div className="mx-[-5px] p-5 flex flex-rows justify-between bg-deg0 text-deg3">
         <p className="text-4xl font-sans">2. Google Cybersecurity</p>{" "}
+        <div
+          className="flex flex-row gap-x-1 text-xl/4
+          *:border-deg0 *:bg-deg3 *:text-deg0 *:border-2 *:rounded-full *:px-2 *:flex *:items-center"
+        >
+          {certicateTags.googleCybersecurity.map((e) => (
+            <div key={e}>{e}</div>
+          ))}
+        </div>
+      </div>
+      <div className="p-2 grid grid-cols-[1.2fr_1fr] gap-x-2">
+        <div className="relative w-full h-110">
+          <img
+            className="border-x-4 border-t-4 border-deg0 w-full h-full object-cover object-top"
+            src="/cybersec.png"
+            alt="Cybersecurity Certificate"
+          />
+          <div className="absolute inset-0 shadow-[inset_0_-20px_50px_0px_theme(colors.deg0)] pointer-events-none"></div>
+        </div>
+        <ul
+          className="flex flex-col items-center gap-y-6 list-disc py-6 pr-6 pl-10 text-justify
+          text-2xl font-sans bg-deg3 rounded-lg p-2 font-bold"
+        >
+          <li>
+            Completed a rigorous 8-course program focused on threat mitigation,
+            network security, and vulnerability assessment.
+          </li>
+          <li>
+            Gained practical, hands-on experience utilizing Python, Linux, SQL,
+            SIEM, and IDS tools to actively identify and mitigate security
+            risks.
+          </li>
+        </ul>
+      </div>
+      {/* 3. jlpt n5 */}
+      {/* <div className="mx-[-5px] p-5 flex flex-rows justify-between bg-deg0 text-deg3">
+        <p className="text-4xl font-sans">3. JLPT N5</p>{" "}
         <div
           className="flex flex-row gap-x-1 text-xl/4
           *:border-deg0 *:bg-deg3 *:text-deg0 *:border-2 *:rounded-full *:px-2 *:flex *:items-center"
@@ -152,29 +213,44 @@ export default function EducationPage({ isActive }: EducationPageProps) {
           and Jquery as well as using libraries and frameworks. I mainly focused
           on hooks, contexts and state management.
         </p>
-      </div>
-
-      {/* 2. astrotech */}
-      <div className="mx-[-5px] p-5 flex flex-rows justify-between bg-deg0 text-deg3">
-        <p className="text-4xl font-sans">3. Astrotech</p>{" "}
+      </div> */}
+      {/* 4. astrotech */}
+      <div className="mx-[-5px] p-5 flex flex-rows justify-between bg-deg0 ">
+        <p className="text-4xl font-sans text-deg3">3. Astrotech</p>{" "}
         <div
           className="flex flex-row gap-x-1 text-xl/4
           *:border-deg0 *:bg-deg3 *:text-deg0 *:border-2 *:rounded-full *:px-2 *:flex *:items-center"
         >
-          {certicateTags.fcc.map((e) => (
+          {certicateTags.astro.map((e) => (
             <div key={e}>{e}</div>
           ))}
         </div>
       </div>
-      <div className="p-2 grid grid-cols-2 gap-x-2">
-        <img className="border-4 border-deg0" src="/astro.png" />
-        <p className="text-xl font-sans font-[700]">
-          This course introduced me to React, and taught the essentials of JS
-          and Jquery as well as using libraries and frameworks. I mainly focused
-          on hooks, contexts and state management.
-        </p>
+      <div className="p-2 grid grid-cols-[1.2fr_1fr] gap-x-2">
+        <div className="relative w-full h-110 ">
+          <img
+            className="w-full h-full object-cover object-top border-x-4 border-deg0 border-t-4 "
+            src="/astro.png"
+            alt="AstroTech Certificate"
+          />
+          <div className="absolute inset-0 shadow-[inset_0_-20px_50px_0px_theme(colors.deg0)] pointer-events-none"></div>
+        </div>
+        <ul
+          className="flex flex-col items-center gap-y-6 list-disc py-6 pr-6 pl-10 text-justify
+          text-2xl font-sans bg-deg3 rounded-lg p-2 font-bold"
+        >
+          <li>
+            An independent study pursued purely out of a personal interest in
+            astrophysics.
+          </li>
+          <li>
+            This coursework covered the intersection of science and technology,
+            specifically focusing on how modern astronomical discoveries are
+            made, the tools used to observe the cosmos, and the processing of
+            scientific data.
+          </li>
+        </ul>
       </div>
-
       {/* Education */}
       <p className="my-8 ml-[-4px] font-mono font-[600] italic text-6xl">
         <span className="px-5 bg-deg3 rounded-r-full">Formal Education</span>
@@ -186,26 +262,15 @@ export default function EducationPage({ isActive }: EducationPageProps) {
         {Object.entries(education).map(([k, v]) => (
           <div className="relative" key={k}>
             {k !== "2022-2026" && (
-              <span className="absolute top-1 right-0">
-                <svg
-                  width="50"
-                  height="30"
-                  viewBox="0 0 73 30"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M72.4142 16.1421C73.1953 15.3611 73.1953 14.0947 72.4142 13.3137L59.6863 0.585775C58.9052 -0.195274 57.6389 -0.195274 56.8579 0.585775C56.0768 1.36682 56.0768 2.63315 56.8579 3.4142L68.1716 14.7279L56.8579 26.0416C56.0768 26.8227 56.0768 28.089 56.8579 28.87C57.6389 29.6511 58.9052 29.6511 59.6863 28.87L72.4142 16.1421ZM0 14.7279L-1.74846e-07 16.7279L71 16.7279L71 14.7279L71 12.7279L1.74846e-07 12.7279L0 14.7279Z"
-                    fill="#F48080"
-                  />
-                </svg>
+              <span className="absolute bottom-5 right-0 text-9xl text-deg1">
+                →
               </span>
             )}
             <span className="text-deg1 text-4xl">{k}</span>
             <br />
-            <div>
+            <ul className="list-disc pl-6">
               {Object.entries(v).map(([k1, v1]) => (
-                <div key={k1}>
+                <li key={k1}>
                   <span>{k1} : </span>
                   {k === "2021-2022" && k1 === "Score" ? (
                     <>
@@ -219,9 +284,9 @@ export default function EducationPage({ isActive }: EducationPageProps) {
                       {v1}
                     </span>
                   )}
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         ))}
       </div>

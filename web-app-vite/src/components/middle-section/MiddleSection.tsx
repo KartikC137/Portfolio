@@ -109,7 +109,7 @@ export default function MiddleSection() {
         ref={pageARef}
         id="page-a"
         onClick={() => handlePageClick("a")}
-        className={`w-[1200px] h-[2000px] bg-deg3
+        className={`w-[1200px] h-[2000px] bg-deg3 
           ${activePage === "a" ? firstPageStyle : activePage === "c" ? secondPageStyle : thirdPageStyle}
           ${isAnimatingLayout ? "transition-[transform,top,right,border-radius,box-shadow] duration-[600ms] ease-in-out" : ""}
         `}
@@ -127,7 +127,7 @@ export default function MiddleSection() {
           ${isAnimatingLayout ? "transition-[transform,top,right,border-radius,box-shadow] duration-[600ms] ease-in-out" : ""}
         `}
       >
-        <EducationPage isActive={activePage === "b"} />
+        <EducationPage />
       </div>
 
       {/* Page c */}
