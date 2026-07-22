@@ -34,11 +34,11 @@ export default function Footer({ isActive }: { isActive: boolean }) {
 
   return (
     <div
-      className={`px-2 flex flex-row items-center gap-x-4 rounded-lg ${isActive && "bg-deg0/0"}`}
+      className={`${isActive && "p-5"} flex flex-row items-center gap-x-4 rounded-lg`}
     >
       <p
         ref={nameRef}
-        className={`font-bold max-w-90 ${isActive ? "font-mono italic" : "font-sans"} `}
+        className={` font-bold max-w-90 ${isActive ? "font-mono italic" : "font-sans pl-4 pt-4"} `}
       >
         Kartik Kumbhar
         <span className="block text-xl font-mono">Pune, India 411046</span>
@@ -221,10 +221,11 @@ export default function Footer({ isActive }: { isActive: boolean }) {
           {/* summary  */}
           <p
             ref={elPitchRef}
-            className="opacity-0 bg-deg0 rounded-xl py-2 border-x-4 border-deg3/80 px-4 text-2xl font-mono font-bold text-deg3"
+            className="px-4 py-2 opacity-0 bg-deg2 rounded-2xl 
+            text-justify text-2xl text-deg0 font-sans font-bold"
           >
-            A fullstack blockchain dev. and a graduating computer engineering
-            student. Experienced in writing smart contracts in solidity,
+            A fullstack blockchain dev. and graduated in bachelor's of computer
+            engineering. Experienced in writing smart contracts in solidity,
             Building relational DB, Designing UI/UX via personal projects.
           </p>
         </>

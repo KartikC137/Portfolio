@@ -14,7 +14,7 @@ const education = {
   "2022-2026": {
     "B.E Computer Engineering": "NBNSTIC,Pune",
     University: "SPPU",
-    "Current CGPA": 8.4, //calcalute correct value
+    "Final CGPA": 8.42,
   },
 };
 const techStack = {
@@ -59,25 +59,25 @@ export default function EducationPage() {
 
   return (
     <>
-      <p className="my-8 ml-[-4px] font-mono font-[600] italic text-6xl">
+      <p className="my-8  font-mono font-[600] italic text-6xl">
         <span className="px-5 bg-deg3 rounded-r-full">Aquired Skills</span>
       </p>
-      <div className="flex flex-col gap-y-7">
+      <div className="flex flex-col gap-y-5">
         {/* technical */}
-        <p className="mx-[-5px] py-1 pl-6 text-3xl bg-deg1 text-deg3 font-bold font-mono">
+        <p className=" py-1 pl-6 text-3xl bg-deg1 text-deg3 font-bold font-mono">
           Technical Skills
         </p>
-        <div className="flex flex-col gap-y-3 px-5">
+        <div className="flex flex-col gap-y-2 px-5">
           <nav
             id="filter-nav"
-            className="grid grid-flow-col bg-deg3 text-2xl text-center font-mono font-[500] rounded-t-lg border-2"
+            className="grid grid-flow-col bg-deg3 text-2xl text-center font-mono font-[500] rounded-t-lg border-3"
           >
             {Object.keys(techStack).map((c) => (
               <button
                 key={c}
                 onClick={() => setFilter(c as keyof typeof techStack)}
                 className={`transition-all ease-in-out duration-300 
-                 p-1 border-r-2 border-deg0 last:border-none first:rounded-tl-md last:rounded-tr-md 
+                 p-1 border-r-3 border-deg0 last:border-none first:rounded-tl-sm last:rounded-tr-sm 
               ${
                 filter === c
                   ? "bg-deg0 text-deg3 font-[600]"
@@ -89,10 +89,10 @@ export default function EducationPage() {
               </button>
             ))}
           </nav>
-          <div className="min-h-69 p-4 bg-deg3 border-2 rounded-b-lg text-3xl">
+          <div className="flex flex-col justify-center min-h-69 p-4 bg-deg3 border-3 rounded-b-lg text-3xl">
             {Object.entries(techStack[filter]).map(([k, v]) => (
-              <p className="py-1" key={k}>
-                <span className="text-3xl mr-2 font-sans">{k}</span>
+              <p className="py-1 text-justify" key={k}>
+                <span className="mr-2 font-sans">{k}</span>
                 <span className="px-2 rounded-lg font-[700] font-mono bg-deg2">
                   {v}
                 </span>
@@ -102,23 +102,23 @@ export default function EducationPage() {
         </div>
 
         {/* others */}
-        <p className="mx-[-5px] py-1 pl-6 text-3xl bg-deg1 text-deg3 font-bold font-mono">
+        <p className=" py-1 pl-6 text-3xl bg-deg1 text-deg3 font-bold font-mono">
           Other Skills
         </p>
-        {/* TODO: add the rest  */}
-        <div className="p-4 mx-4 bg-deg3 border-2 rounded-lg text-3xl text-deg0">
+        <div className="p-4 mx-4 bg-deg3 border-3 rounded-lg text-3xl text-deg0">
           <span className="mr-2 font-sans">Languages: </span>
-          <span className="px-2 rounded-sm font-[600] font-mono bg-deg2">
+          <span className="px-2 rounded-lg font-[700] font-mono bg-deg2">
             English, Japanese(N5), Hindi, Kannada, Marathi
           </span>
         </div>
       </div>
+
       {/* certifications */}
-      <p className="my-8 ml-[-4px] font-mono font-[600] italic text-6xl">
+      <p className="my-8  font-mono font-[600] italic text-6xl">
         <span className="px-5 bg-deg3 rounded-r-full">Certifications</span>
       </p>
       {/* 1. fcc */}
-      <div className="mx-[-5px] p-5 flex flex-rows justify-between bg-deg0 text-deg3">
+      <div className=" p-5 flex flex-rows justify-between bg-deg0 text-deg3">
         <p className="text-4xl font-sans">1. Frontend Development Libraries</p>
         <div
           className="flex flex-row gap-x-1 text-xl/4
@@ -129,16 +129,17 @@ export default function EducationPage() {
           ))}
         </div>
       </div>
-      <div className="p-2 grid grid-cols-[1.2fr_1fr] gap-x-2">
-        <div className="relative w-full">
-          <img
-            className="w-full h-full object-cover object-top "
-            src="/fcc.png"
-            alt="Frontend Certificate"
-          />
-          <div className="absolute inset-0 shadow-[inset_0_-20px_50px_0px_theme(colors.deg0)] pointer-events-none"></div>
-        </div>
-        <div className="text-2xl font-sans bg-deg3 rounded-lg font-bold">
+      <div className="p-2 grid grid-cols-2 gap-x-1">
+        {/* // crop this to remove borders */}
+        <img
+          className="w-full h-110 object-fill rounded-l-2xl border-4 border-deg0"
+          src="/fcc.png"
+          alt="Frontend Certificate"
+        />
+        <div
+          className="bg-deg3 rounded-r-2xl border-4
+        text-2xl font-sans font-bold"
+        >
           <ul className="flex flex-col items-center gap-y-6 list-disc py-6 pr-6 pl-10 text-justify">
             <li>
               Completed a comprehensive, 300-hour certification focused on
@@ -158,9 +159,10 @@ export default function EducationPage() {
           </div>
         </div>
       </div>
+
       {/* 2. cybersec */}
-      <div className="mx-[-5px] p-5 flex flex-rows justify-between bg-deg0 text-deg3">
-        <p className="text-4xl font-sans">2. Google Cybersecurity</p>{" "}
+      <div className=" p-5 flex flex-rows justify-between bg-deg0 text-deg3">
+        <p className="text-4xl font-sans">2. Google Cybersecurity</p>
         <div
           className="flex flex-row gap-x-1 text-xl/4
           *:border-deg0 *:bg-deg3 *:text-deg0 *:border-2 *:rounded-full *:px-2 *:flex *:items-center"
@@ -170,18 +172,15 @@ export default function EducationPage() {
           ))}
         </div>
       </div>
-      <div className="p-2 grid grid-cols-[1.2fr_1fr] gap-x-2">
-        <div className="relative w-full h-110">
-          <img
-            className="border-x-4 border-t-4 border-deg0 w-full h-full object-cover object-top"
-            src="/cybersec.png"
-            alt="Cybersecurity Certificate"
-          />
-          <div className="absolute inset-0 shadow-[inset_0_-20px_50px_0px_theme(colors.deg0)] pointer-events-none"></div>
-        </div>
+      <div className="p-2 grid grid-cols-2 gap-x-1">
+        <img
+          className="w-full h-110 border-4 border-deg0 rounded-l-2xl object-fill"
+          src="/cybersec.png"
+          alt="Cybersecurity Certificate"
+        />
         <ul
-          className="flex flex-col items-center gap-y-6 list-disc py-6 pr-6 pl-10 text-justify
-          text-2xl font-sans bg-deg3 rounded-lg p-2 font-bold"
+          className="list-disc py-6 pr-6 pl-10 flex flex-col items-center gap-y-6 bg-deg3 rounded-r-2xl border-4 
+          text-justify text-2xl font-sans font-bold"
         >
           <li>
             Completed a rigorous 8-course program focused on threat mitigation,
@@ -195,7 +194,7 @@ export default function EducationPage() {
         </ul>
       </div>
       {/* 3. jlpt n5 */}
-      {/* <div className="mx-[-5px] p-5 flex flex-rows justify-between bg-deg0 text-deg3">
+      {/* <div className=" p-5 flex flex-rows justify-between bg-deg0 text-deg3">
         <p className="text-4xl font-sans">3. JLPT N5</p>{" "}
         <div
           className="flex flex-row gap-x-1 text-xl/4
@@ -215,7 +214,7 @@ export default function EducationPage() {
         </p>
       </div> */}
       {/* 4. astrotech */}
-      <div className="mx-[-5px] p-5 flex flex-rows justify-between bg-deg0 ">
+      <div className=" p-5 flex flex-rows justify-between bg-deg0 ">
         <p className="text-4xl font-sans text-deg3">3. Astrotech</p>{" "}
         <div
           className="flex flex-row gap-x-1 text-xl/4
@@ -226,18 +225,18 @@ export default function EducationPage() {
           ))}
         </div>
       </div>
-      <div className="p-2 grid grid-cols-[1.2fr_1fr] gap-x-2">
-        <div className="relative w-full h-110 ">
+      <div className="p-2 grid grid-cols-2 gap-x-1">
+        <div className="relative w-full ">
           <img
-            className="w-full h-full object-cover object-top border-x-4 border-deg0 border-t-4 "
+            className="w-full h-110 object-fill border-4 border-deg0 rounded-l-2xl"
             src="/astro.png"
             alt="AstroTech Certificate"
           />
-          <div className="absolute inset-0 shadow-[inset_0_-20px_50px_0px_theme(colors.deg0)] pointer-events-none"></div>
+          {/* <div className="absolute inset-0 shadow-[inset_0_-20px_50px_0px_theme(colors.deg0)] pointer-events-none"></div> */}
         </div>
         <ul
-          className="flex flex-col items-center gap-y-6 list-disc py-6 pr-6 pl-10 text-justify
-          text-2xl font-sans bg-deg3 rounded-lg p-2 font-bold"
+          className="list-disc  py-6 pr-6 pl-10 flex flex-col items-center gap-y-6  bg-deg3 rounded-r-2xl  border-4 
+          text-justify text-2xl font-sans font-bold"
         >
           <li>
             An independent study pursued purely out of a personal interest in
@@ -252,17 +251,17 @@ export default function EducationPage() {
         </ul>
       </div>
       {/* Education */}
-      <p className="my-8 ml-[-4px] font-mono font-[600] italic text-6xl">
+      <p className="my-8  font-mono font-[600] italic text-6xl">
         <span className="px-5 bg-deg3 rounded-r-full">Formal Education</span>
       </p>
       <div
-        className="h-105 mt-2 grid grid-cols-[1fr_1.1fr_1.3fr] rounded-b-xl bg-deg3 border-t-4 border-b-4 border-deg0 text-2xl
+        className="h-69 overflow-hidden mt-2 grid grid-cols-[1fr_1.1fr_1.3fr] rounded-b-xl bg-deg3 border-t-4 border-b-4 border-deg0 text-2xl
       *:p-2 *:border-r-4 *:last:border-none *:border-deg0"
       >
         {Object.entries(education).map(([k, v]) => (
           <div className="relative" key={k}>
             {k !== "2022-2026" && (
-              <span className="absolute bottom-5 right-0 text-9xl text-deg1">
+              <span className="absolute top-[-25px] right-0 text-8xl text-deg1">
                 →
               </span>
             )}
