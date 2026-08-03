@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ExpandableImage from "../UI/ExpandableImage";
 
 const education = {
   2020: {
@@ -14,7 +15,7 @@ const education = {
   "2022-2026": {
     "B.E Computer Engineering": "NBNSTIC,Pune",
     University: "SPPU",
-    "Final CGPA": 8.42,
+    CGPA: 8.42,
   },
 };
 const techStack = {
@@ -60,7 +61,7 @@ export default function EducationPage() {
   return (
     <>
       <p className="my-8  font-mono font-[600] italic text-6xl">
-        <span className="px-5 bg-deg3 rounded-r-full">Aquired Skills</span>
+        <span className="ml-5 px-5 bg-deg3 rounded-full">Aquired Skills</span>
       </p>
       <div className="flex flex-col gap-y-5">
         {/* technical */}
@@ -115,11 +116,25 @@ export default function EducationPage() {
 
       {/* certifications */}
       <p className="my-8  font-mono font-[600] italic text-6xl">
-        <span className="px-5 bg-deg3 rounded-r-full">Certifications</span>
+        <span className="ml-5 px-5 bg-deg3 rounded-full">Certifications</span>
       </p>
       {/* 1. fcc */}
       <div className=" p-5 flex flex-rows justify-between bg-deg0 text-deg3">
-        <p className="text-4xl font-sans">1. Frontend Development Libraries</p>
+        <a
+          href="https://www.freecodecamp.org/certification/kartikc137/front-end-development-libraries"
+          className="flex text-4xl font-sans"
+        >
+          1. Frontend Development Libraries
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="40px"
+            width="40px"
+            viewBox="0 -960 960 960"
+            className="ml-4 fill-deg3"
+          >
+            <path d="M202.87-111.87q-37.78 0-64.39-26.61t-26.61-64.39v-554.26q0-37.78 26.61-64.39t64.39-26.61H480v91H202.87v554.26h554.26V-480h91v277.13q0 37.78-26.61 64.39t-64.39 26.61H202.87ZM395.41-332 332-395.41l361.72-361.72H560v-91h288.13V-560h-91v-133.72L395.41-332Z" />
+          </svg>
+        </a>
         <div
           className="flex flex-row gap-x-1 text-xl/4
           *:border-deg0 *:bg-deg3 *:text-deg0 *:border-2 *:rounded-full *:px-2 *:flex *:items-center"
@@ -131,7 +146,7 @@ export default function EducationPage() {
       </div>
       <div className="p-2 grid grid-cols-2 gap-x-1">
         {/* // crop this to remove borders */}
-        <img
+        <ExpandableImage
           className="w-full h-110 object-fill rounded-l-2xl border-4 border-deg0"
           src="/fcc.png"
           alt="Frontend Certificate"
@@ -161,8 +176,22 @@ export default function EducationPage() {
       </div>
 
       {/* 2. cybersec */}
-      <div className=" p-5 flex flex-rows justify-between bg-deg0 text-deg3">
-        <p className="text-4xl font-sans">2. Google Cybersecurity</p>
+      <div className="p-5 flex flex-rows justify-between bg-deg0 text-deg3">
+        <a
+          href="https://coursera.org/share/d65097ba4b0700b23fff09eaeb3f0aac"
+          className="flex text-4xl font-sans"
+        >
+          2. Google Cybersecurity
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="40px"
+            width="40px"
+            viewBox="0 -960 960 960"
+            className="ml-4 fill-deg3"
+          >
+            <path d="M202.87-111.87q-37.78 0-64.39-26.61t-26.61-64.39v-554.26q0-37.78 26.61-64.39t64.39-26.61H480v91H202.87v554.26h554.26V-480h91v277.13q0 37.78-26.61 64.39t-64.39 26.61H202.87ZM395.41-332 332-395.41l361.72-361.72H560v-91h288.13V-560h-91v-133.72L395.41-332Z" />
+          </svg>
+        </a>
         <div
           className="flex flex-row gap-x-1 text-xl/4
           *:border-deg0 *:bg-deg3 *:text-deg0 *:border-2 *:rounded-full *:px-2 *:flex *:items-center"
@@ -173,7 +202,7 @@ export default function EducationPage() {
         </div>
       </div>
       <div className="p-2 grid grid-cols-2 gap-x-1">
-        <img
+        <ExpandableImage
           className="w-full h-110 border-4 border-deg0 rounded-l-2xl object-fill"
           src="/cybersec.png"
           alt="Cybersecurity Certificate"
@@ -206,7 +235,7 @@ export default function EducationPage() {
         </div>
       </div>
       <div className="p-2 grid grid-cols-2 gap-x-2">
-        <img className="border-4 border-deg0" src="/cybersec.png" />
+        <ExpandableImage className="border-4 border-deg0" src="/cybersec.png" />
         <p className="text-xl font-sans font-[700]">
           This course introduced me to React, and taught the essentials of JS
           and Jquery as well as using libraries and frameworks. I mainly focused
@@ -215,7 +244,21 @@ export default function EducationPage() {
       </div> */}
       {/* 4. astrotech */}
       <div className=" p-5 flex flex-rows justify-between bg-deg0 ">
-        <p className="text-4xl font-sans text-deg3">3. Astrotech</p>{" "}
+        <a
+          href="https://coursera.org/share/23c6bf6e506fef03170fe3e5d2c1e26d"
+          className="flex text-4xl font-sans text-deg3"
+        >
+          3. Astrotech
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="40px"
+            width="40px"
+            viewBox="0 -960 960 960"
+            className="ml-4 fill-deg3"
+          >
+            <path d="M202.87-111.87q-37.78 0-64.39-26.61t-26.61-64.39v-554.26q0-37.78 26.61-64.39t64.39-26.61H480v91H202.87v554.26h554.26V-480h91v277.13q0 37.78-26.61 64.39t-64.39 26.61H202.87ZM395.41-332 332-395.41l361.72-361.72H560v-91h288.13V-560h-91v-133.72L395.41-332Z" />
+          </svg>
+        </a>
         <div
           className="flex flex-row gap-x-1 text-xl/4
           *:border-deg0 *:bg-deg3 *:text-deg0 *:border-2 *:rounded-full *:px-2 *:flex *:items-center"
@@ -227,7 +270,7 @@ export default function EducationPage() {
       </div>
       <div className="p-2 grid grid-cols-2 gap-x-1">
         <div className="relative w-full ">
-          <img
+          <ExpandableImage
             className="w-full h-110 object-fill border-4 border-deg0 rounded-l-2xl"
             src="/astro.png"
             alt="AstroTech Certificate"
@@ -250,12 +293,13 @@ export default function EducationPage() {
           </li>
         </ul>
       </div>
+
       {/* Education */}
       <p className="my-8  font-mono font-[600] italic text-6xl">
-        <span className="px-5 bg-deg3 rounded-r-full">Formal Education</span>
+        <span className="ml-5 px-5 bg-deg3 rounded-full">Formal Education</span>
       </p>
       <div
-        className="h-69 overflow-hidden mt-2 grid grid-cols-[1fr_1.1fr_1.3fr] rounded-b-xl bg-deg3 border-t-4 border-b-4 border-deg0 text-2xl
+        className="h-69 overflow-hidden mx-4 mt-2 grid grid-cols-[1fr_1.1fr_1.3fr] rounded-xl bg-deg3 border-4 border-deg0 text-2xl
       *:p-2 *:border-r-4 *:last:border-none *:border-deg0"
       >
         {Object.entries(education).map(([k, v]) => (

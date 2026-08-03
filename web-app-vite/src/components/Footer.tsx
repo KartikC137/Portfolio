@@ -1,53 +1,33 @@
-import { useEffect, useRef } from "react";
-
 export default function Footer({ isActive }: { isActive: boolean }) {
-  const nameRef = useRef<HTMLParagraphElement | null>(null);
-  const elPitchRef = useRef<HTMLParagraphElement | null>(null);
-
-  useEffect(() => {
-    const el1 = nameRef.current;
-    const el2 = elPitchRef.current;
-    if (!el1) return;
-    el1.style.lineHeight = "64px";
-
-    const nameSizeChangeT = setTimeout(
-      () => {
-        requestAnimationFrame(() => {
-          el1.style.fontSize = isActive ? "84px" : "64px";
-        });
-      },
-      isActive ? 200 : 50,
-    );
-
-    const elPitchAppearT = setTimeout(() => {
-      requestAnimationFrame(() => {
-        if (!el2) return;
-        el2.style.opacity = `100%`;
-      });
-    }, 500);
-
-    return () => {
-      clearTimeout(nameSizeChangeT);
-      clearTimeout(elPitchAppearT);
-    };
-  }, [isActive]);
-
   return (
     <div
-      className={`${isActive && "p-5"} flex flex-row items-center gap-x-4 rounded-lg`}
+      className={`${isActive && "p-5"} h-full flex flex-row items-center justify-between `}
     >
+      {!isActive && (
+        <p
+          className="absolute top-8 right-[-8px] px-4 py-2  border-deg0 border-y-4 border-l-4 rounded-l-full bg-deg2
+        text-lg font-mono font-bold"
+        >
+          Get in touch &#10095;
+        </p>
+      )}
       <p
-        ref={nameRef}
-        className={` font-bold max-w-90 ${isActive ? "font-mono italic" : "font-sans pl-4 pt-4"} `}
+        className={`w-80 h-full font-sans text-7xl/14 ${isActive ? "pt-2 italic" : "pl-4 pt-8"} `}
       >
         Kartik Kumbhar
-        <span className="block text-xl font-mono">Pune, India 411046</span>
+        <span className="block font-bold text-xl font-mono">
+          Pune, India 411046
+        </span>
       </p>
-      {/* The elevator pitch */}
+
       {isActive && (
         <>
-          <div className="flex flex-col bg-deg2 rounded-full p-6">
-            <div className="flex flex-row justify-end gap-x-2 text-lg font-sans *:hover:border-2 *:shadow-sm *:shadow-deg0/50 *:rounded-full">
+          <div className="overflow-hidden h-30  flex flex-row items-center justify-between gap-x-4 pl-6 pr-4 bg-deg2 rounded-full text-deg0">
+            <p className="h-20 whitespace-nowrap flex items-center px-4 py-2 bg-deg0 rounded-full text-deg2 text-2xl">
+              +91 9975543858
+            </p>
+            {/* logos */}
+            <div className="flex flex-row gap-x-2 text-deg2 *:hover:border-2 *:shadow-sm *:shadow-deg0/50 *:rounded-full">
               {/* Email */}
               <a
                 href="mailto:kartikininterstice@gmail.com"
@@ -216,18 +196,11 @@ export default function Footer({ isActive }: { isActive: boolean }) {
                 </svg>
               </a>
             </div>
-          </div>
 
-          {/* summary  */}
-          <p
-            ref={elPitchRef}
-            className="px-4 py-2 opacity-0 bg-deg2 rounded-2xl 
-            text-justify text-2xl text-deg0 font-sans font-bold"
-          >
-            A fullstack blockchain dev. and graduated in bachelor's of computer
-            engineering. Experienced in writing smart contracts in solidity,
-            Building relational DB, Designing UI/UX via personal projects.
-          </p>
+            <p className="whitespace-nowrap px-4 border-l-4 font-sans font-bold text-4xl">
+              Open to Work: Pune, Remote
+            </p>
+          </div>
         </>
       )}
     </div>

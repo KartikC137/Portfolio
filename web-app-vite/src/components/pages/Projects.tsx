@@ -13,40 +13,30 @@ import Carousel from "../Carousel";
 
 // placeholders
 const p1 = ["cybersec: digital forensics", "socket.io", "postgres", "next.js"];
-const p2 = ["decentralized-identity", "sign in with eth"];
+const p2 = ["ongoing", "decentralized-identity", "sign in with eth"];
 const p3 = ["C", "linux kernel", "file systems"];
 
 export default function ProjectsPage() {
   return (
     <div>
       <p
-        className="py-4 px-6 mt-5 ml-5  rounded-l-3xl bg-deg3 border-deg0 border-y-4 border-l-4
+        className="py-4 px-6 mt-5 ml-5 rounded-l-3xl bg-deg3 border-deg0 border-y-4 border-l-4
       font-mono font-[600] italic text-6xl text-left text-deg0"
       >
         Projects
       </p>
-
       {/* Chain of custody */}
-      <div className="relative mt-5 ml-5 flex flex-col h-200 rounded-l-2xl">
-        <svg
-          className={`z-[-1] absolute h-full w-full border-y-4 border-l-4 rounded-l-2xl `}
-        >
+      <div className="relative m-5 flex flex-col h-200">
+        <svg className={`z-[-1] absolute h-full w-full border-4 rounded-2xl`}>
           <defs>
             <mask id="p1-mask">
               <rect width="100%" height="100%" fill="white" />
-              {/* summary mask */}
-              <rect
-                className="w-318 h-51"
-                x="10"
-                y="166"
-                rx="10"
-                fill="black"
-              />
+
               {/* logo mask */}
               <svg
                 id="ChainOfCustody"
                 x="320"
-                y="20"
+                y="22"
                 height="150"
                 viewBox="0 0 300 75"
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,26 +48,52 @@ export default function ProjectsPage() {
                 <path d="M229.414 35.7687C230.195 34.9877 230.195 33.7213 229.414 32.9403L216.686 20.2124C215.905 19.4313 214.639 19.4313 213.858 20.2124C213.077 20.9934 213.077 22.2597 213.858 23.0408L225.172 34.3545L213.858 45.6682C213.077 46.4492 213.077 47.7156 213.858 48.4966C214.639 49.2777 215.905 49.2777 216.686 48.4966L229.414 35.7687ZM187 34.3545V36.3545H228V34.3545V32.3545H187V34.3545Z" />
               </svg>
               {/* carousel masks */}
-              <rect className="w-18 h-100" x="20" y="376" rx="10" fill="gray" />
-              <rect
-                className="w-18 h-100"
-                x="1200"
-                y="376"
-                rx="10"
-                fill="gray"
-              />
+              <rect className="w-18 h-100" x="20" y="376" rx="10" />
+              <rect className="w-18 h-100" x="1180" y="376" rx="10" />
             </mask>
           </defs>
-          <rect className="h-full w-full fill-deg1" mask="url(#p1-mask)" />
+          <rect className="h-full w-full fill-deg1/80" mask="url(#p1-mask)" />
         </svg>
         {/* heading */}
         <div className="flex flex-row justify-between items-center pr-5 pt-5">
           <div>
             <p
-              className="ml-[-20px] px-4 py-2 rounded-r-2xl border-y-4 border-r-4 border-deg0 
+              className="flex flex-row items-center gap-x-4 ml-[-20px] px-4 py-2 rounded-r-2xl border-y-4 border-r-4 border-deg0 
             bg-deg3 text-deg0 text-7xl"
             >
               1. Custody Chain
+              <a
+                href="https://github.com/KartikC137/CustodyChain"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-[60px] h-[60px]"
+              >
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clipPath="url(#clip0_52_78)">
+                    <path
+                      d="M31.7808 0.547943H8.21921C3.9825 0.547943 0.547974 3.98247 0.547974 8.21918V31.7808C0.547974 36.0175 3.9825 39.4521 8.21921 39.4521H31.7808C36.0176 39.4521 39.4521 36.0175 39.4521 31.7808V8.21918C39.4521 3.98247 36.0176 0.547943 31.7808 0.547943Z"
+                      fill="#450000"
+                      stroke="#450000"
+                      strokeWidth="21.9178"
+                    />
+                    <path
+                      d="M33.0448 12.8374C31.7237 10.5738 29.9318 8.78177 27.6684 7.46082C25.4048 6.13979 22.9335 5.47945 20.2529 5.47945C17.5727 5.47945 15.1006 6.13999 12.8374 7.46082C10.5739 8.78171 8.78195 10.5738 7.46086 12.8374C6.13997 15.1008 5.47949 17.5725 5.47949 20.2525C5.47949 23.4716 6.4187 26.3664 8.29759 28.9375C10.1763 31.5088 12.6033 33.2881 15.5784 34.2755C15.9247 34.3397 16.181 34.2945 16.3477 34.141C16.5145 33.9872 16.5977 33.7947 16.5977 33.5641C16.5977 33.5256 16.5944 33.1795 16.588 32.5254C16.5814 31.8712 16.5783 31.3006 16.5783 30.8137L16.1359 30.8902C15.8538 30.9419 15.4979 30.9638 15.0683 30.9576C14.6388 30.9516 14.193 30.9066 13.7314 30.8229C13.2696 30.7399 12.8401 30.5476 12.4425 30.2462C12.0451 29.9448 11.763 29.5504 11.5963 29.0634L11.4039 28.6207C11.2757 28.326 11.0739 27.9987 10.7981 27.6398C10.5223 27.2806 10.2435 27.0371 9.96135 26.9089L9.82667 26.8125C9.73693 26.7484 9.65365 26.6712 9.57664 26.5815C9.4997 26.4918 9.44209 26.4021 9.40362 26.3122C9.36509 26.2222 9.39702 26.1485 9.49977 26.0906C9.60252 26.0327 9.7882 26.0046 10.0576 26.0046L10.4422 26.0621C10.6987 26.1135 11.016 26.267 11.3944 26.5237C11.7727 26.7801 12.0836 27.1135 12.3273 27.5237C12.6224 28.0496 12.9779 28.4503 13.3949 28.7261C13.8116 29.0019 14.2317 29.1395 14.6548 29.1395C15.0779 29.1395 15.4433 29.1074 15.7512 29.0436C16.0588 28.9795 16.3474 28.8831 16.6168 28.7549C16.7322 27.8954 17.0465 27.235 17.5593 26.7734C16.8284 26.6966 16.1713 26.5809 15.5876 26.4271C15.0043 26.2731 14.4014 26.0231 13.7796 25.6766C13.1574 25.3305 12.6412 24.9007 12.231 24.3879C11.8206 23.875 11.4839 23.2015 11.2212 22.3681C10.9584 21.5344 10.8269 20.5727 10.8269 19.4827C10.8269 17.9307 11.3336 16.61 12.3467 15.5199C11.8721 14.3531 11.9169 13.0451 12.4813 11.596C12.8532 11.4804 13.4047 11.5671 14.1356 11.8556C14.8666 12.1441 15.4018 12.3913 15.7418 12.5963C16.0818 12.8012 16.3542 12.9748 16.5594 13.1156C17.7523 12.7823 18.9833 12.6156 20.2528 12.6156C21.5223 12.6156 22.7535 12.7823 23.9465 13.1156L24.6774 12.6542C25.1773 12.3463 25.7676 12.0641 26.4468 11.8076C27.1265 11.5512 27.6463 11.4806 28.0055 11.5962C28.5824 13.0453 28.6338 14.3533 28.159 15.5201C29.1721 16.6102 29.679 17.9313 29.679 19.4829C29.679 20.5729 29.547 21.5376 29.2846 22.3777C29.0219 23.218 28.6822 23.8908 28.2656 24.3976C27.8484 24.9043 27.329 25.3307 26.7071 25.6768C26.0851 26.0231 25.4821 26.273 24.8988 26.4271C24.3152 26.5811 23.6581 26.6968 22.9272 26.7738C23.5938 27.3506 23.9271 28.2612 23.9271 29.5051V33.5636C23.9271 33.7941 24.0073 33.9866 24.1678 34.1404C24.3281 34.294 24.5812 34.3392 24.9275 34.2748C27.903 33.2876 30.33 31.5083 32.2086 28.937C34.0871 26.3659 35.0266 23.4711 35.0266 20.2519C35.0259 17.5723 34.3651 15.1008 33.0448 12.8374Z"
+                      fill="#FFD5D5"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_52_78">
+                      <rect width="40" height="40" rx="20" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
             </p>
             <div
               className="flex flex-row gap-x-1 text-lg/4 ml-5 my-2
@@ -96,38 +112,25 @@ export default function ProjectsPage() {
         >
           A blockchain based Decentralized Chain of custody manager. The
           evidences are confidential and all the transactions are transparent
-          and verifiable, not owned by a single authority.Integrity can be
+          and verifiable, not owned by a single authority. Integrity can be
           tested by anyone without revealing the actual evidence data.
         </p>
-        <div className="h-full">
+        <div className="h-full px-5 pt-2 pb-4">
           <Carousel projectName={"custody_chain"} />
         </div>
       </div>
-
       {/* Peoples Mandate */}
-      <div
-        className="relative mt-5 mr-5 flex flex-col h-200 
-       rounded-l-2xl"
-      >
-        <svg
-          className={`z-[-1] absolute h-full w-full border-y-4 border-r-4 rounded-r-2xl `}
-        >
+      <div className="relative m-5 flex flex-col h-200">
+        <svg className={`z-[-1] absolute h-full w-full border-4 rounded-2xl`}>
           <defs>
             <mask id="p2-mask">
               <rect width="100%" height="100%" fill="white" />
-              {/* summary mask */}
-              <rect
-                className="w-318 h-61"
-                x="14"
-                y="166"
-                rx="10"
-                fill="black"
-              />
+
               {/* logo mask */}
               <svg
                 id="PeoplesMandate"
-                x="-400"
-                y="20"
+                x="400"
+                y="22"
                 height="150"
                 viewBox="0 0 200 80"
                 fill="black"
@@ -186,36 +189,60 @@ export default function ProjectsPage() {
                   width="26"
                   height="26"
                   rx="13"
-                  className="fill-deg1"
+                  className="fill-deg1/80"
                 />
                 <path d="M59.3453 70.1434C57.7636 69.4609 56.3824 68.5292 55.2016 67.3484C54.0207 66.1675 53.0891 64.7863 52.4066 63.2046C51.7241 61.6229 51.3828 59.9384 51.3828 58.1509C51.3828 56.3634 51.7241 54.6842 52.4066 53.1134C53.0891 51.5425 54.0207 50.1667 55.2016 48.9859C56.3824 47.805 57.7636 46.8734 59.3453 46.1909C60.927 45.5084 62.6116 45.1671 64.3991 45.1671C66.1866 45.1671 67.8657 45.5084 69.4366 46.1909C71.0074 46.8734 72.3832 47.805 73.5641 48.9859C74.7449 50.1667 75.6766 51.5425 76.3591 53.1134C77.0416 54.6842 77.3828 56.3634 77.3828 58.1509C77.3828 59.9384 77.0416 61.6229 76.3591 63.2046C75.6766 64.7863 74.7449 66.1675 73.5641 67.3484C72.3832 68.5292 71.0074 69.4609 69.4366 70.1434C67.8657 70.8259 66.1866 71.1671 64.3991 71.1671C62.6116 71.1671 60.927 70.8259 59.3453 70.1434ZM64.3828 68.5021C64.9461 67.7221 65.4336 66.9096 65.8453 66.0646C66.257 65.2196 66.5928 64.3204 66.8528 63.3671H61.9128C62.1728 64.3204 62.5086 65.2196 62.9203 66.0646C63.332 66.9096 63.8195 67.7221 64.3828 68.5021ZM61.0028 67.9821C60.6128 67.2671 60.2716 66.525 59.9791 65.7559C59.6866 64.9867 59.4428 64.1904 59.2478 63.3671H55.4128C56.0411 64.4504 56.8266 65.3929 57.7691 66.1946C58.7116 66.9963 59.7895 67.5921 61.0028 67.9821ZM67.7628 67.9821C68.9761 67.5921 70.0541 66.9963 70.9966 66.1946C71.9391 65.3929 72.7245 64.4504 73.3528 63.3671H69.5178C69.3228 64.1904 69.0791 64.9867 68.7866 65.7559C68.4941 66.525 68.1528 67.2671 67.7628 67.9821ZM54.3078 60.7671H58.7278C58.6628 60.3338 58.6141 59.9059 58.5816 59.4834C58.5491 59.0609 58.5328 58.6221 58.5328 58.1671C58.5328 57.7121 58.5491 57.2734 58.5816 56.8509C58.6141 56.4284 58.6628 56.0004 58.7278 55.5671H54.3078C54.1995 56.0004 54.1182 56.4284 54.0641 56.8509C54.0099 57.2734 53.9828 57.7121 53.9828 58.1671C53.9828 58.6221 54.0099 59.0609 54.0641 59.4834C54.1182 59.9059 54.1995 60.3338 54.3078 60.7671ZM61.3278 60.7671H67.4378C67.5028 60.3338 67.5516 59.9059 67.5841 59.4834C67.6166 59.0609 67.6328 58.6221 67.6328 58.1671C67.6328 57.7121 67.6166 57.2734 67.5841 56.8509C67.5516 56.4284 67.5028 56.0004 67.4378 55.5671H61.3278C61.2628 56.0004 61.2141 56.4284 61.1816 56.8509C61.1491 57.2734 61.1328 57.7121 61.1328 58.1671C61.1328 58.6221 61.1491 59.0609 61.1816 59.4834C61.2141 59.9059 61.2628 60.3338 61.3278 60.7671ZM70.0378 60.7671H74.4578C74.5661 60.3338 74.6474 59.9059 74.7016 59.4834C74.7557 59.0609 74.7828 58.6221 74.7828 58.1671C74.7828 57.7121 74.7557 57.2734 74.7016 56.8509C74.6474 56.4284 74.5661 56.0004 74.4578 55.5671H70.0378C70.1028 56.0004 70.1516 56.4284 70.1841 56.8509C70.2166 57.2734 70.2328 57.7121 70.2328 58.1671C70.2328 58.6221 70.2166 59.0609 70.1841 59.4834C70.1516 59.9059 70.1028 60.3338 70.0378 60.7671ZM69.5178 52.9671H73.3528C72.7245 51.8838 71.9391 50.9413 70.9966 50.1396C70.0541 49.3379 68.9761 48.7421 67.7628 48.3521C68.1528 49.0671 68.4941 49.8092 68.7866 50.5784C69.0791 51.3475 69.3228 52.1438 69.5178 52.9671ZM61.9128 52.9671H66.8528C66.5928 52.0138 66.257 51.1146 65.8453 50.2696C65.4336 49.4246 64.9461 48.6121 64.3828 47.8321C63.8195 48.6121 63.332 49.4246 62.9203 50.2696C62.5086 51.1146 62.1728 52.0138 61.9128 52.9671ZM55.4128 52.9671H59.2478C59.4428 52.1438 59.6866 51.3475 59.9791 50.5784C60.2716 49.8092 60.6128 49.0671 61.0028 48.3521C59.7895 48.7421 58.7116 49.3379 57.7691 50.1396C56.8266 50.9413 56.0411 51.8838 55.4128 52.9671Z" />
               </svg>
               {/* carousel masks */}
-              <rect className="w-18 h-90" x="24" y="416" rx="10" fill="gray" />
-              <rect
-                className="w-18 h-90"
-                x="1204"
-                y="416"
-                rx="10"
-                fill="gray"
-              />
+              <rect className="w-18 h-100" x="20" y="376" rx="10" />
+              <rect className="w-18 h-100" x="1180" y="376" rx="10" />
             </mask>
           </defs>
-          <rect className="h-full w-full fill-deg1" mask="url(#p2-mask)" />
+          <rect className="h-full w-full fill-deg1/80" mask="url(#p2-mask)" />
         </svg>
         {/* heading */}
-        <div className="flex flex-row justify-between items-center pl-5 pt-5">
-          <div className="w-[40%] flex justify-center"></div>
-
+        <div className="flex flex-row justify-between items-center pr-5 pt-5">
           <div>
             <p
-              className="mr-[-20px] px-4 py-2 rounded-l-2xl border-y-4 border-l-4 border-deg0 
+              className="flex flex-row items-center gap-x-4 ml-[-20px] px-4 py-2 rounded-r-2xl border-y-4 border-r-4 border-deg0 
             bg-deg3 text-deg0 text-7xl"
             >
               2. Peoples Mandate
+              <a
+                href="https://github.com/KartikC137/Peoples-Mandate"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-[60px] h-[60px]"
+              >
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clipPath="url(#clip0_52_78)">
+                    <path
+                      d="M31.7808 0.547943H8.21921C3.9825 0.547943 0.547974 3.98247 0.547974 8.21918V31.7808C0.547974 36.0175 3.9825 39.4521 8.21921 39.4521H31.7808C36.0176 39.4521 39.4521 36.0175 39.4521 31.7808V8.21918C39.4521 3.98247 36.0176 0.547943 31.7808 0.547943Z"
+                      fill="#450000"
+                      stroke="#450000"
+                      strokeWidth="21.9178"
+                    />
+                    <path
+                      d="M33.0448 12.8374C31.7237 10.5738 29.9318 8.78177 27.6684 7.46082C25.4048 6.13979 22.9335 5.47945 20.2529 5.47945C17.5727 5.47945 15.1006 6.13999 12.8374 7.46082C10.5739 8.78171 8.78195 10.5738 7.46086 12.8374C6.13997 15.1008 5.47949 17.5725 5.47949 20.2525C5.47949 23.4716 6.4187 26.3664 8.29759 28.9375C10.1763 31.5088 12.6033 33.2881 15.5784 34.2755C15.9247 34.3397 16.181 34.2945 16.3477 34.141C16.5145 33.9872 16.5977 33.7947 16.5977 33.5641C16.5977 33.5256 16.5944 33.1795 16.588 32.5254C16.5814 31.8712 16.5783 31.3006 16.5783 30.8137L16.1359 30.8902C15.8538 30.9419 15.4979 30.9638 15.0683 30.9576C14.6388 30.9516 14.193 30.9066 13.7314 30.8229C13.2696 30.7399 12.8401 30.5476 12.4425 30.2462C12.0451 29.9448 11.763 29.5504 11.5963 29.0634L11.4039 28.6207C11.2757 28.326 11.0739 27.9987 10.7981 27.6398C10.5223 27.2806 10.2435 27.0371 9.96135 26.9089L9.82667 26.8125C9.73693 26.7484 9.65365 26.6712 9.57664 26.5815C9.4997 26.4918 9.44209 26.4021 9.40362 26.3122C9.36509 26.2222 9.39702 26.1485 9.49977 26.0906C9.60252 26.0327 9.7882 26.0046 10.0576 26.0046L10.4422 26.0621C10.6987 26.1135 11.016 26.267 11.3944 26.5237C11.7727 26.7801 12.0836 27.1135 12.3273 27.5237C12.6224 28.0496 12.9779 28.4503 13.3949 28.7261C13.8116 29.0019 14.2317 29.1395 14.6548 29.1395C15.0779 29.1395 15.4433 29.1074 15.7512 29.0436C16.0588 28.9795 16.3474 28.8831 16.6168 28.7549C16.7322 27.8954 17.0465 27.235 17.5593 26.7734C16.8284 26.6966 16.1713 26.5809 15.5876 26.4271C15.0043 26.2731 14.4014 26.0231 13.7796 25.6766C13.1574 25.3305 12.6412 24.9007 12.231 24.3879C11.8206 23.875 11.4839 23.2015 11.2212 22.3681C10.9584 21.5344 10.8269 20.5727 10.8269 19.4827C10.8269 17.9307 11.3336 16.61 12.3467 15.5199C11.8721 14.3531 11.9169 13.0451 12.4813 11.596C12.8532 11.4804 13.4047 11.5671 14.1356 11.8556C14.8666 12.1441 15.4018 12.3913 15.7418 12.5963C16.0818 12.8012 16.3542 12.9748 16.5594 13.1156C17.7523 12.7823 18.9833 12.6156 20.2528 12.6156C21.5223 12.6156 22.7535 12.7823 23.9465 13.1156L24.6774 12.6542C25.1773 12.3463 25.7676 12.0641 26.4468 11.8076C27.1265 11.5512 27.6463 11.4806 28.0055 11.5962C28.5824 13.0453 28.6338 14.3533 28.159 15.5201C29.1721 16.6102 29.679 17.9313 29.679 19.4829C29.679 20.5729 29.547 21.5376 29.2846 22.3777C29.0219 23.218 28.6822 23.8908 28.2656 24.3976C27.8484 24.9043 27.329 25.3307 26.7071 25.6768C26.0851 26.0231 25.4821 26.273 24.8988 26.4271C24.3152 26.5811 23.6581 26.6968 22.9272 26.7738C23.5938 27.3506 23.9271 28.2612 23.9271 29.5051V33.5636C23.9271 33.7941 24.0073 33.9866 24.1678 34.1404C24.3281 34.294 24.5812 34.3392 24.9275 34.2748C27.903 33.2876 30.33 31.5083 32.2086 28.937C34.0871 26.3659 35.0266 23.4711 35.0266 20.2519C35.0259 17.5723 34.3651 15.1008 33.0448 12.8374Z"
+                      fill="#FFD5D5"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_52_78">
+                      <rect width="40" height="40" rx="20" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
             </p>
             <div
-              className="flex flex-row gap-x-1 text-lg/4 mr-5 my-2 justify-end
+              className="flex flex-row gap-x-1 text-lg/4 m-5 my-2 
               *:bg-deg0 *:text-deg2 *:rounded-full *:px-4 *:py-3"
             >
               {p2.map((e) => (
@@ -223,32 +250,54 @@ export default function ProjectsPage() {
               ))}
             </div>
           </div>
+
+          <div className="w-[40%] flex justify-center"></div>
         </div>
         <p
           className="mx-5 my-1 p-4 rounded-xl bg-deg3
          text-justify  text-deg0 text-4xl"
         >
-          A blockchain-based decentralized election system designed to
-          prioritize secure, verifiable, and privacy-preserving digital
-          democratic processes. The platform leverages immutability of EVM smart
-          contracts to guarantee that every cast ballot is tamper-proof,
-          permanently indexed, and publicly auditable.
+          Decentralized election system designed to prioritize secure,
+          verifiable, and privacy-preserving digital democratic processes. The
+          platform leverages immutability of EVM smart contracts to guarantee
+          that every cast ballot is tamper-proof, permanently indexed, and
+          publicly auditable.
         </p>
-        <div className="h-full">
+        <div className="h-full px-5 pt-2 pb-4">
           <Carousel projectName={"peoples_mandate"} />
         </div>
       </div>
 
       {/* LFS */}
-      <div className="mt-5 ml-5 flex flex-col h-250 bg-deg1 rounded-l-2xl border-y-4 border-l-4">
+      <div className="relative m-5 flex flex-col h-250 bg-deg1/80 rounded-2xl border-4">
         {/* heading */}
         <div className="flex flex-row justify-between items-center pr-5 pt-5">
           <div>
             <p
-              className="ml-[-24px] px-4 py-2 rounded-r-2xl border-y-4 border-r-4 border-deg0 
+              className="flex flex-row items-center gap-x-4 ml-[-24px] px-4 py-2 rounded-r-2xl border-y-4 border-r-4 border-deg0 
             bg-deg3 text-deg0 text-7xl"
             >
               3. Linux From Scratch
+              <a
+                href="https://www.linkedin.com/posts/himanshu-warulkar_linuxfromscratch-opensource-linux-activity-7194155760639950848-hDKX?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD5VCU8B5QF7uim7VKt8ysQXPmIRoUtD2qM"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-[60px] h-[60px]"
+              >
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="40" height="40" rx="20" fill="#450000" />
+                  <path
+                    d="M34 8.05883V31.9412C34 32.4872 33.7831 33.0109 33.397 33.397C33.0109 33.7831 32.4872 34 31.9412 34H8.05883C7.51278 34 6.98911 33.7831 6.60302 33.397C6.21692 33.0109 6 32.4872 6 31.9412V8.05883C6 7.51278 6.21692 6.98911 6.60302 6.60302C6.98911 6.21692 7.51278 6 8.05883 6H31.9412C32.4872 6 33.0109 6.21692 33.397 6.60302C33.7831 6.98911 34 7.51278 34 8.05883ZM14.2353 16.7059H10.1177V29.8823H14.2353V16.7059ZM14.6059 12.1765C14.6081 11.865 14.5488 11.5562 14.4317 11.2676C14.3145 10.979 14.1416 10.7163 13.9229 10.4945C13.7042 10.2728 13.4439 10.0962 13.157 9.97506C12.8701 9.85388 12.5621 9.79039 12.2506 9.78823H12.1765C11.5431 9.78823 10.9356 10.0399 10.4877 10.4877C10.0399 10.9356 9.78823 11.5431 9.78823 12.1765C9.78823 12.8099 10.0399 13.4173 10.4877 13.8652C10.9356 14.3131 11.5431 14.5647 12.1765 14.5647C12.488 14.5724 12.7979 14.5186 13.0886 14.4064C13.3793 14.2943 13.645 14.1259 13.8706 13.911C14.0963 13.6961 14.2773 13.4388 14.4035 13.1539C14.5296 12.869 14.5984 12.5621 14.6059 12.2506V12.1765ZM29.8823 21.8777C29.8823 17.9165 27.3623 16.3765 24.8588 16.3765C24.0391 16.3354 23.2229 16.51 22.4919 16.8828C21.7606 17.2556 21.14 17.8136 20.6917 18.5012H20.5765V16.7059H16.7059V29.8823H20.8235V22.8741C20.764 22.1564 20.9901 21.4441 21.4526 20.8921C21.9153 20.3401 22.577 19.9929 23.2941 19.9259H23.4506C24.76 19.9259 25.7317 20.7494 25.7317 22.8246V29.8823H29.8494L29.8823 21.8777Z"
+                    fill="#FFD5D5"
+                  />
+                </svg>
+              </a>
             </p>
             <div
               className="flex flex-row gap-x-1 text-lg/4 ml-5 my-2
@@ -262,12 +311,14 @@ export default function ProjectsPage() {
           <div className="w-[20%] flex justify-center"></div>
         </div>
         <p
-          className="mx-5 p-5 rounded-2xl bg-deg3 border-4
+          className="mx-5 my-1 p-5 rounded-2xl bg-deg3 
          text-justify text-deg0 text-4xl"
         >
-          Booted a basic linux OS from scratch.
+          A personal project following the guide linux from scratch. built a
+          basic linux os to understand the working of linux kernel, bootloaders,
+          file systems etc
         </p>
-        <div className="w-full h-full px-5 pb-5 pt-2">
+        <div className="w-full h-164 px-5 pb-5 pt-2">
           <video
             controls
             loop
@@ -275,8 +326,145 @@ export default function ProjectsPage() {
             playsInline
             className="rounded-2xl border-4 w-full h-full object-fill"
           >
-            <source src="/videos/lfs.mp4" type="video/mp4" />
+            <source src="/videos/lfs.mp4#t=1" type="video/mp4" />
           </video>
+        </div>
+      </div>
+
+      {/* Open source contributions */}
+      <p
+        className="py-4 px-6 mt-5 mr-5 rounded-r-3xl bg-deg3 border-deg0 border-y-4 border-r-4
+      font-mono font-[600] italic text-6xl text-left text-deg0"
+      >
+        Open Source Contributions
+      </p>
+      <div className="relative m-5 flex flex-col h-154 bg-deg1/80 border-4 rounded-2xl">
+        {/* heading */}
+        <p
+          className="m-5 p-4 rounded-xl bg-deg3
+         text-justify  text-deg0 text-4xl"
+        >
+          I am passionate about open source, I will make sure to commit as much
+          as I can as I keep upskilling.
+        </p>
+        <div
+          className="ml-5 p-4 rounded-l-2xl
+         font-mono font-[600] text-3xl text-deg1 bg-deg0 border-deg0"
+        >
+          COMMITS:
+        </div>
+
+        <div className="ml-5 my-5 h-full grid grid-cols-[10fr_1fr] ">
+          <div className="flex flex-col justify-center rounded-2xl bg-deg3">
+            <p className="flex items-center px-4 text-4xl">
+              KanjiMap - Interactive Kanji Stroke Animator
+              <a href="https://github.com/gabor-kovacs/the-kanji-map/pull/27">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="40px"
+                  width="40px"
+                  viewBox="0 -960 960 960"
+                  className="mx-4 fill-deg0"
+                >
+                  <path d="M202.87-111.87q-37.78 0-64.39-26.61t-26.61-64.39v-554.26q0-37.78 26.61-64.39t64.39-26.61H480v91H202.87v554.26h554.26V-480h91v277.13q0 37.78-26.61 64.39t-64.39 26.61H202.87ZM395.41-332 332-395.41l361.72-361.72H560v-91h288.13V-560h-91v-133.72L395.41-332Z" />
+                </svg>
+              </a>
+            </p>
+            <ul className="pl-12 pr-8 text-justify font-mono font-bold list-disc text-[28px]">
+              <li>
+                Developed a highly interactive React component to visualize and
+                control kanji stroke orders, facilitating a more precise
+                linguistic breakdown and study of Japanese characters.
+              </li>
+              <li>
+                Precision Control: Engineered a custom, cross-browser compatible
+                range slider allowing users to play, pause, and scrub through
+                SVG stroke animations in real-time.
+              </li>
+            </ul>
+          </div>
+          <div className="flex flex-col gap-y-3 items-center justify-center text-4xl text-deg1">
+            <button className="p-4 rounded-full bg-deg0 rotate-90">
+              &#10094;
+            </button>
+            <p className="font-mono font-bold text-deg0">1/1</p>
+            <button className="p-4 rounded-full bg-deg0 rotate-90">
+              &#10095;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Hackathons */}
+      <p
+        className="py-4 px-6 mt-5 ml-5 rounded-l-3xl bg-deg3 border-deg0 border-y-4 border-l-4
+      font-mono font-[600] italic text-6xl text-left text-deg0"
+      >
+        Hackathons
+      </p>
+      <div className="relative h-175 m-5 flex flex-col ">
+        <svg className={`z-[-1] absolute h-full w-full border-4 rounded-2xl`}>
+          <defs>
+            <mask id="h-mask">
+              <rect width="100%" height="100%" fill="white" />
+
+              {/* carousel masks */}
+              <rect className="w-18 h-52" x="116" y="464" rx="10" />
+              <rect className="w-18 h-52" x="1180" y="464" rx="10" />
+            </mask>
+          </defs>
+          <rect className="h-full w-full fill-deg1/80" mask="url(#h-mask)" />
+        </svg>
+
+        <div className="h-full grid grid-cols-[1fr_10fr]">
+          <div className="flex flex-col gap-y-3 items-center justify-center text-4xl text-deg1">
+            <button className="p-4 rounded-full bg-deg0 rotate-90">
+              &#10094;
+            </button>
+            <p className="font-mono font-bold text-deg0">1/1</p>
+            <button className="p-4 rounded-full bg-deg0 rotate-90">
+              &#10095;
+            </button>
+          </div>
+          <div className="grid grid-rows-[2fr_1fr] gap-y-3 pr-5 py-5">
+            <div className="flex flex-col justify-center rounded-2xl bg-deg3">
+              <p className="flex items-center px-4 text-4xl">
+                Figma FigBuild 2026
+                <a href="https://devpost.com/software/figma-figbuild-2026">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="40px"
+                    width="40px"
+                    viewBox="0 -960 960 960"
+                    className="ml-4 fill-deg0"
+                  >
+                    <path d="M202.87-111.87q-37.78 0-64.39-26.61t-26.61-64.39v-554.26q0-37.78 26.61-64.39t64.39-26.61H480v91H202.87v554.26h554.26V-480h91v277.13q0 37.78-26.61 64.39t-64.39 26.61H202.87ZM395.41-332 332-395.41l361.72-361.72H560v-91h288.13V-560h-91v-133.72L395.41-332Z" />
+                  </svg>
+                </a>
+                <a
+                  className="ml-2 px-4 py-2 rounded-full bg-deg0 font-mono font-bold text-deg3 text-lg"
+                  href="https://www.figma.com/design/KYkiuFPZdWO9VUQvrSwrXN/Savor--Hacking-the-human-taste?node-id=0-1&t=nObizPmzzRBsWyfK-1"
+                >
+                  OPEN IN FIGMA
+                </a>
+              </p>
+              <ul className="pl-12 pr-8 text-justify font-mono font-bold list-disc text-[28px]/10">
+                <li>
+                  Designed a dynamic, Material You-inspired interface in Figma
+                  for a speculative gustatory augmentation system, utilizing
+                  responsive color logic to visualize real-time flavor profiles
+                  and user-controlled taste manipulation.
+                </li>
+                <li>
+                  Engineered complex visual data management features, including
+                  a 5-axis radar chart for personalized chemical profiling and a
+                  dedicated "Sensory Health" dashboard to monitor user
+                  well-being and neural fatigue.
+                </li>
+              </ul>
+            </div>
+            <Carousel projectName="figbuild" />
+          </div>
         </div>
       </div>
     </div>

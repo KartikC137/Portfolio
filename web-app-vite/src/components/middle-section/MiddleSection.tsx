@@ -3,6 +3,7 @@ import ProjectsPage from "../pages/Projects";
 import MorePage from "../pages/MoreAboutMe";
 import EducationPage from "../pages/Education";
 import { useEffect, useRef, useState } from "react";
+import { useWindowScale } from "../../hooks/useWindowScale";
 import {
   firstPageStyle,
   pageTransistion,
@@ -12,20 +13,14 @@ import {
 import Lenis from "lenis";
 import Footer from "../Footer";
 
-/**
- * @dev page order: a - projects w-[1200px] h-[2000px]
- *                  b - education and cert h-[3000px]
- *                  c - more about me h-[1500px]
- */
-
-const pages = { a: "deg3", b: "deg2", c: "deg1" };
+const pages = ["a", "b", "c"];
 
 type SpeedsObject = { a: number; b: number; c: number };
 
 const scrollDistances: Record<string, SpeedsObject> = {
-  a: { a: -520, b: 1620, c: 3500 },
-  b: { a: -220, b: 1470, c: 3350 },
-  c: { a: -375, b: 1770, c: 3200 },
+  a: { a: -520, b: 1620, c: 3370 },
+  b: { a: -220, b: 1470, c: 3220 },
+  c: { a: -375, b: 1770, c: 3070 },
 };
 
 export default function MiddleSection() {
@@ -34,15 +29,23 @@ export default function MiddleSection() {
   const pageCRef = useRef<HTMLDivElement | null>(null);
   const revealedRef = useRef(false);
 
+  const scale = useWindowScale();
+
+  const scaleRef = useRef<number>(scale);
+
+  useEffect(() => {
+    scaleRef.current = scale;
+  }, [scale]);
+
   const scrollRef = useRef<number>(0);
   const activePageRef = useRef<string>("a");
 
-  const [activePage, setActivePage] = useState<string>("c");
+  const [activePage, setActivePage] = useState<string>("a");
   const [footerActive, setFooterActive] = useState<boolean>(true);
   const [isAnimatingLayout, setIsAnimatingLayout] = useState<boolean>(false);
 
   const setExcludedStyle = (toExclude: string) => {
-    Object.entries(pages).forEach(([e]) => {
+    pages.forEach(([e]) => {
       const el = document.getElementById(`page-${e}`);
       if (el) {
         el.style.opacity = toExclude === e ? "" : "80%";
@@ -55,8 +58,9 @@ export default function MiddleSection() {
   };
 
   const applyTransforms = (scroll: number, currentPage: string) => {
-    const progress = Math.min(scroll / 4500, 1);
-    const shouldReveal = progress > 0.67;
+    const canvasScroll = scroll / scaleRef.current;
+    const progress = Math.min(canvasScroll / 4500, 1);
+    const shouldReveal = progress > 0.75;
     const speeds = scrollDistances[currentPage];
 
     if (pageARef.current)
@@ -104,119 +108,210 @@ export default function MiddleSection() {
   }
 
   return (
-    <div
-      className="relative h-[4500px]  
-     text-deg0 font-sans 
-     *:rounded-3xl"
-    >
-      {/* Page a */}
+    <>
       <div
-        ref={pageARef}
-        id="page-a"
-        onClick={() => handlePageClick("a")}
-        className={`w-330 h-[4400px]
+        style={{ height: `${4500 * scale}px` }}
+        className="w-full relative overflow-hidden"
+      >
+        <div
+          style={{
+            transform: `scale(${scale})`,
+          }}
+          className={`relative h-[4500px] w-[1920px] origin-top-left *:rounded-3xl
+        text-deg0 font-sans`}
+        >
+          {/* Page a */}
+          <div
+            ref={pageARef}
+            id="page-a"
+            onClick={() => handlePageClick("a")}
+            className={`w-330 h-[4400px]
           ${activePage === "a" ? firstPageStyle : activePage === "c" ? secondPageStyle : thirdPageStyle}
           ${isAnimatingLayout ? pageTransistion : ""}
         `}
-      >
-        <svg
-          className={`z-[-1] absolute h-full w-full border-4 rounded-3xl 
-            ${activePage === "a" ? "border-deg0 backdrop-blur-md" : "border-deg3 "}`}
-        >
-          <defs>
-            <mask id="a-mask">
-              <rect width="100%" height="100%" fill="white" />
-              {/* p1 parent mask */}
-              <rect className="w-320 h-195" x="30" y="140" fill="gray" />
-              {/* p2 parent mask */}
-              <rect className="w-320 h-195" x="10" y="960" fill="gray" />
-            </mask>
-          </defs>
-          <rect className="h-full w-full fill-deg3/80" mask="url(#a-mask)" />
-        </svg>
-        <ProjectsPage />
-      </div>
+          >
+            {activePage !== "a" && (
+              <div className="absolute inset-0 z-[100] cursor-pointer rounded-3xl" />
+            )}
+            <svg
+              className={`z-[-1] absolute h-full w-full border-4 rounded-3xl 
+            ${activePage === "a" ? "border-deg0 backdrop-blur-sm" : "border-deg3 "}`}
+            >
+              <defs>
+                <mask id="a-mask">
+                  <rect width="100%" height="100%" fill="white" />
+                  {/* p1 parent mask */}
+                  <rect
+                    className="w-320 h-200 fill-deg2"
+                    x="16"
+                    y="136"
+                    rx="20"
+                  />
+                  {/* p2 parent mask */}
+                  <rect
+                    className="w-320 h-200 fill-deg2"
+                    x="16"
+                    y="956"
+                    rx="20"
+                  />
+                  {/* h parent mask */}
+                  <rect
+                    className="w-320 h-174 fill-deg2"
+                    x="16"
+                    y="3672"
+                    rx="20"
+                  />
+                </mask>
+              </defs>
+              <rect className="h-full w-full fill-deg3" mask="url(#a-mask)" />
+            </svg>
+            <ProjectsPage />
+          </div>
 
-      {/* Page b */}
-      <div
-        ref={pageBRef}
-        id="page-b"
-        onClick={() => handlePageClick("b")}
-        className={`w-330 h-[2850px] 
+          {/* Page b */}
+          <div
+            ref={pageBRef}
+            id="page-b"
+            onClick={() => handlePageClick("b")}
+            className={`w-330 h-[2850px] backdrop-blur-sm
           ${activePage === "b" ? firstPageStyle : activePage === "a" ? secondPageStyle : thirdPageStyle}
           ${isAnimatingLayout ? pageTransistion : ""}
         `}
-      >
-        <svg
-          className={`z-[-1] absolute top-0 bottom-0 right-0 left-0 h-full w-full border-4 rounded-3xl 
-            ${activePage === "b" ? "border-deg0" : "border-deg3"}`}
-        >
-          <defs>
-            <mask id="b-mask">
-              <rect width="100%" height="100%" fill="white" />
-              <rect
-                x="-20"
-                y="14"
-                width="566"
-                height="88"
-                rx="44"
-                fill="black"
-              />
-              <rect
-                x="-20"
-                y="691"
-                width="566"
-                height="88"
-                rx="44"
-                fill="black"
-              />
-              <rect
-                x="-20"
-                y="2424"
-                width="637"
-                height="88"
-                rx="44"
-                fill="black"
-              />
-            </mask>
-          </defs>
-          <rect className="h-full w-full fill-deg2" mask="url(#b-mask)" />
-        </svg>
-        <EducationPage />
-      </div>
+          >
+            {activePage !== "b" && (
+              <div className="absolute inset-0 z-[100] cursor-pointer rounded-3xl" />
+            )}
+            <svg
+              className={`z-[-1] absolute top-0 bottom-0 right-0 left-0 h-full w-full border-4 rounded-3xl 
+            ${activePage === "b" ? "border-deg0 " : "border-deg3"}`}
+            >
+              <defs>
+                <mask id="b-mask">
+                  <rect width="100%" height="100%" fill="white" />
+                  <rect
+                    x="12"
+                    y="15"
+                    width="552"
+                    height="86"
+                    rx="43"
+                    fill="black"
+                  />
+                  <rect
+                    x="12"
+                    y="692"
+                    width="552"
+                    height="86"
+                    rx="44"
+                    fill="black"
+                  />
+                  <rect
+                    x="12"
+                    y="2424"
+                    width="624"
+                    height="86"
+                    rx="44"
+                    fill="black"
+                  />
+                </mask>
+              </defs>
+              <rect className="h-full w-full fill-deg2" mask="url(#b-mask)" />
+            </svg>
+            <EducationPage />
+          </div>
 
-      {/* Page c */}
-      <div
-        ref={pageCRef}
-        id="page-c"
-        onClick={() => handlePageClick("c")}
-        className={`w-330 h-[1500px]
+          {/* Page c */}
+          <div
+            ref={pageCRef}
+            id="page-c"
+            onClick={() => handlePageClick("c")}
+            className={`w-330 h-[1600px] pr-20  backdrop-blur-sm
           ${activePage === "c" ? firstPageStyle : activePage === "b" ? secondPageStyle : thirdPageStyle}
           ${isAnimatingLayout ? pageTransistion : ""}
           `}
-      >
-        <svg
-          className={`z-[-1] absolute top-0 bottom-0 right-0 left-0 h-full w-full border-4 rounded-3xl 
+          >
+            {activePage !== "c" && (
+              <div className="absolute inset-0 z-[100] cursor-pointer rounded-3xl" />
+            )}
+            <svg
+              className={`z-[-1] absolute top-0 bottom-0 right-0 left-0 h-full w-full border-4 rounded-3xl 
             ${activePage === "c" ? "border-deg0" : "border-deg3"}`}
-        >
-          <defs>
-            <mask id="c-mask">
-              <rect width="100%" height="100%" fill="white" />
-              <rect x="5" y="24" width="472" height="84" rx="40" fill="black" />
-            </mask>
-          </defs>
-          <rect className="h-full w-full fill-deg1" mask="url(#c-mask)" />
-        </svg>
-        <MorePage />
+            >
+              <defs>
+                <mask id="c-mask">
+                  <rect width="100%" height="100%" fill="white" />
+                  <rect
+                    x="12"
+                    y="24"
+                    width="516"
+                    height="92"
+                    rx="45"
+                    fill="black"
+                  />
+
+                  <svg
+                    width="10%"
+                    x="1220"
+                    height="100%"
+                    className="text-deg1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="gray"
+                  >
+                    <defs>
+                      <pattern
+                        id="pixel-vine"
+                        x="0"
+                        y="0"
+                        width="16"
+                        height="16"
+                        patternUnits="userSpaceOnUse"
+                        patternTransform="scale(6)" /* Adjust this to make the pixels larger or smaller */
+                      >
+                        <path
+                          fill="currentColor"
+                          shapeRendering="crispEdges"
+                          d="
+          M4 0h3v1H4z M11 0h2v1H11z
+          M4 1h1v1H4z M7 1h2v1H7z M11 1h3v1H11z
+          M2 2h1v1H2z M4 2h1v1H4z M8 2h2v1H8z M11 2h2v1H11z M14 2h1v1H14z
+          M2 3h1v1H2z M4 3h2v1H4z M9 3h1v1H9z M12 3h1v1H12z M14 3h1v1H14z
+          M2 4h2v1H2z M5 4h3v1H5z M10 4h2v1H10z M13 4h2v1H13z
+          M3 5h6v1H3z M11 5h4v1H11z
+          M3 6h3v1H3z M7 6h2v1H7z M11 6h2v1H11z M14 6h1v1H14z
+          M3 7h2v1H3z M6 7h2v1H6z M11 7h2v1H11z
+          M3 8h3v1H3z M10 8h2v1H10z
+          M2 9h2v1H2z M5 9h1v1H5z M9 9h2v1H9z M12 9h2v1H12z
+          M1 10h2v1H1z M4 10h3v1H4z M10 10h2v1H10z M13 10h2v1H13z
+          M1 11h1v1H1z M4 11h2v1H4z M10 11h3v1H10z M14 11h1v1H14z
+          M1 12h1v1H1z M4 12h1v1H4z M7 12h3v1H7z M11 12h2v1H11z
+          M3 13h2v1H3z M7 13h3v1H7z M11 13h2v1H11z
+          M3 14h2v1H3z M11 14h3v1H11z
+        "
+                        />
+                      </pattern>
+                    </defs>
+
+                    <rect width="100%" height="100%" fill="url(#pixel-vine)" />
+                  </svg>
+                </mask>
+              </defs>
+              <rect className="h-full w-full fill-deg1" mask="url(#c-mask)" />
+            </svg>
+            <MorePage />
+          </div>
+        </div>
       </div>
 
+      {/* Footer */}
       <div
+        style={{
+          transform: `scale(${scale})`,
+        }}
         onClick={() => !revealedRef.current && setFooterActive(!footerActive)}
         className={`
-          z-[101] fixed bottom-4 left-5 h-50 
-          backdrop-blur-sm
+           z-[101] fixed bottom-4 left-5 h-50 origin-bottom-left rounded-3xl
+          backdrop-blur-lg
           transition-all duration-700 ease-in-out 
-          ${footerActive ? "text-deg2 border-deg2/80 w-[calc(100vw-4.7rem)]" : "w-102 p-2 border-deg3 text-deg0 bg-gradient-to-r from-deg2 to-deg1/20"} 
+          ${footerActive ? "text-deg2 w-[calc(100vw-3.6rem)]" : "w-110 p-2 text-deg0 bg-gradient-to-r from-deg2 to-deg1/20"} 
         `}
       >
         <svg
@@ -229,19 +324,11 @@ export default function MiddleSection() {
               {footerActive && (
                 <>
                   <rect
-                    x="380"
-                    y="45"
-                    width="338"
-                    height="98"
-                    rx="49"
-                    fill="black"
-                  />
-                  <rect
-                    x="724"
+                    x="744"
                     y="32"
-                    width="1102"
-                    height="124"
-                    rx="18"
+                    width="1100"
+                    height="128"
+                    rx="66"
                     fill="black"
                   />
                 </>
@@ -256,6 +343,6 @@ export default function MiddleSection() {
         </svg>
         <Footer isActive={footerActive} />
       </div>
-    </div>
+    </>
   );
 }
