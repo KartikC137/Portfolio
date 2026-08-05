@@ -311,7 +311,7 @@ export default function MiddleSection() {
            z-[101] fixed bottom-4 left-5 h-50 origin-bottom-left rounded-3xl
           backdrop-blur-lg
           transition-all duration-700 ease-in-out 
-          ${footerActive ? "text-deg2 w-[calc(100vw-3.6rem)]" : "w-110 p-2 text-deg0 bg-gradient-to-r from-deg2 to-deg1/20"} 
+          ${footerActive ? "text-deg2 w-465" : "w-110 p-2 text-deg0 bg-gradient-to-r from-deg2 to-deg1/20"} 
         `}
       >
         <svg
@@ -326,7 +326,7 @@ export default function MiddleSection() {
                   <rect
                     x="744"
                     y="32"
-                    width="1100"
+                    width="1097"
                     height="128"
                     rx="66"
                     fill="black"
