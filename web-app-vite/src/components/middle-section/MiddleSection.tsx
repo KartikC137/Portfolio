@@ -12,15 +12,16 @@ import {
 } from "../../lib/styles";
 import Lenis from "lenis";
 import Footer from "../Footer";
+import NavigationMenu from "../left-section/NavigationMenu";
 
 const pages = ["a", "b", "c"];
 
 type SpeedsObject = { a: number; b: number; c: number };
 
 const scrollDistances: Record<string, SpeedsObject> = {
-  a: { a: -520, b: 1620, c: 3370 },
-  b: { a: -220, b: 1470, c: 3220 },
-  c: { a: -375, b: 1770, c: 3070 },
+  a: { a: -420, b: 1250, c: 2620 },
+  b: { a: -180, b: 1140, c: 2506 },
+  c: { a: -300, b: 1370, c: 2386 },
 };
 
 export default function MiddleSection() {
@@ -30,13 +31,7 @@ export default function MiddleSection() {
   const revealedRef = useRef(false);
 
   const scale = useWindowScale();
-
-  const scaleRef = useRef<number>(scale);
-
-  useEffect(() => {
-    scaleRef.current = scale;
-  }, [scale]);
-
+  const scaleRef = useRef<number>(1);
   const scrollRef = useRef<number>(0);
   const activePageRef = useRef<string>("a");
 
@@ -58,11 +53,10 @@ export default function MiddleSection() {
   };
 
   const applyTransforms = (scroll: number, currentPage: string) => {
-    const canvasScroll = scroll / scaleRef.current;
-    const progress = Math.min(canvasScroll / 4500, 1);
-    const shouldReveal = progress > 0.75;
+    const maxScroll = 4500 * scaleRef.current - window.innerHeight;
+    const progress = maxScroll > 0 ? Math.min(scroll / maxScroll, 1) : 0;
+    const shouldReveal = progress > 0.98;
     const speeds = scrollDistances[currentPage];
-
     if (pageARef.current)
       pageARef.current.style.transform = `translateY(${progress * speeds.a}px)`;
     if (pageBRef.current)
@@ -76,6 +70,9 @@ export default function MiddleSection() {
     }
   };
 
+  useEffect(() => {
+    scaleRef.current = scale;
+  }, [scale]);
   useEffect(() => {
     activePageRef.current = activePage;
     applyTransforms(scrollRef.current, activePage);
@@ -109,6 +106,8 @@ export default function MiddleSection() {
 
   return (
     <>
+      <NavigationMenu />
+
       <div
         style={{ height: `${4500 * scale}px` }}
         className="w-full relative overflow-hidden"

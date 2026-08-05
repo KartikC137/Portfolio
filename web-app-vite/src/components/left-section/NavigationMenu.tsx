@@ -16,6 +16,18 @@ export default function NavigationMenu() {
   const [activePage, setActivePage] = useState<PageKey>("p");
   const [isMenuHidden, setIsMenuHidden] = useState<boolean>(true);
   const scale = useWindowScale();
+
+  const delayAppearance = () => {
+    const el = document.getElementById(`menu-items`);
+    if (el) {
+      el.style.opacity = "0%";
+
+      setTimeout(() => {
+        el.style.opacity = "100%";
+      }, 100);
+    }
+  };
+
   return (
     <div
       style={{
@@ -23,7 +35,7 @@ export default function NavigationMenu() {
       }}
       className={`z-1000 fixed flex flex-col top-12 left-5 w-70 origin-top-left
     transition-all duration-700 ease-in-out 
-    rounded-lg ${isMenuHidden ? "p-1 text-deg0 bg-gradient-to-r from-deg2 to-deg2/60" : "text-deg2"}
+    rounded-lg ${isMenuHidden ? "h-18 p-1 text-deg0 bg-gradient-to-r from-deg2 to-deg2/60" : "h-98 text-deg2"}
     backdrop-blur-sm`}
     >
       {/* bg */}
@@ -70,7 +82,10 @@ export default function NavigationMenu() {
       ${isMenuHidden ? "top-4 mr-[-4px]" : "top-3"}`}
       >
         <svg
-          onClick={() => setIsMenuHidden(!isMenuHidden)}
+          onClick={() => {
+            setIsMenuHidden(!isMenuHidden);
+            delayAppearance();
+          }}
           xmlns="http://www.w3.org/2000/svg"
           height="40px"
           viewBox="0 -960 960 960"
@@ -126,19 +141,19 @@ export default function NavigationMenu() {
         </svg>
       </div>
 
-      <div className={`${!isMenuHidden && "px-4 pt-4 pb-4"}`}>
+      <div
+        id="menu-items"
+        className={`overflow-hidden ${!isMenuHidden && "px-4 pt-4 pb-4"}`}
+      >
         {!isMenuHidden && (
           <>
-            <p className={`pb-4 text-xl font-mono font-bold italic`}>
-              UNDER CONSTRUCTION
-            </p>
             {Object.entries(pages).map(([k, p]) => (
               <div
                 key={k}
                 className={`py-2 pl-3 border-t rounded-md border-deg2 font-mono text-2xl text-deg3
-        ${activePage === k ? "bg-deg2 text-deg0! rounded-full! font-[700]" : " hover:bg-deg1 hover:text-deg0 hover:rounded-full hover:font-[600]"}
-        transition-all duration-200 ease-out 
-        `}
+                ${activePage === k ? "bg-deg2 text-deg0! rounded-full! font-[700]" : " hover:bg-deg1 hover:text-deg0 hover:rounded-full hover:font-[600]"}
+                transition-all duration-200 ease-out 
+                `}
                 onClick={() => setActivePage(k as PageKey)}
               >
                 {p}
