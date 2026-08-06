@@ -61,7 +61,7 @@ export default function EducationPage() {
   return (
     <>
       <p className="my-8  font-mono font-[600] italic text-6xl">
-        <span className="ml-5 px-5 bg-deg3 rounded-full">Aquired Skills</span>
+        <span className="px-5 bg-deg3 rounded-r-full">Aquired Skills</span>
       </p>
       <div className="flex flex-col gap-y-5">
         {/* technical */}
@@ -116,7 +116,7 @@ export default function EducationPage() {
 
       {/* certifications */}
       <p className="my-8  font-mono font-[600] italic text-6xl">
-        <span className="ml-5 px-5 bg-deg3 rounded-full">Certifications</span>
+        <span className="px-5 bg-deg3 rounded-r-full">Certifications</span>
       </p>
       {/* 1. fcc */}
       <div className=" p-5 flex flex-rows justify-between bg-deg0 text-deg3">
@@ -222,26 +222,7 @@ export default function EducationPage() {
           </li>
         </ul>
       </div>
-      {/* 3. jlpt n5 */}
-      {/* <div className=" p-5 flex flex-rows justify-between bg-deg0 text-deg3">
-        <p className="text-4xl font-sans">3. JLPT N5</p>{" "}
-        <div
-          className="flex flex-row gap-x-1 text-xl/4
-          *:border-deg0 *:bg-deg3 *:text-deg0 *:border-2 *:rounded-full *:px-2 *:flex *:items-center"
-        >
-          {certicateTags.fcc.map((e) => (
-            <div key={e}>{e}</div>
-          ))}
-        </div>
-      </div>
-      <div className="p-2 grid grid-cols-2 gap-x-2">
-        <ExpandableImage className="border-4 border-deg0" src="/cybersec.png" />
-        <p className="text-xl font-sans font-[700]">
-          This course introduced me to React, and taught the essentials of JS
-          and Jquery as well as using libraries and frameworks. I mainly focused
-          on hooks, contexts and state management.
-        </p>
-      </div> */}
+
       {/* 4. astrotech */}
       <div className=" p-5 flex flex-rows justify-between bg-deg0 ">
         <a
@@ -296,7 +277,7 @@ export default function EducationPage() {
 
       {/* Education */}
       <p className="my-8  font-mono font-[600] italic text-6xl">
-        <span className="ml-5 px-5 bg-deg3 rounded-full">Formal Education</span>
+        <span className="px-5 bg-deg3 rounded-r-full">Education</span>
       </p>
       <div
         className="h-69 overflow-hidden mx-4 mt-2 grid grid-cols-[1fr_1.1fr_1.3fr] rounded-xl bg-deg3 border-4 border-deg0 text-2xl

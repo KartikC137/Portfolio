@@ -5,12 +5,10 @@ export function useWindowScale(baseWidth = 1920) {
 
   useEffect(() => {
     const handleResize = () => {
-      // Calculate the ratio of the current screen to your base design
       const currentWidth = window.innerWidth;
       setScale(currentWidth / baseWidth);
     };
 
-    // Set initial scale
     handleResize();
 
     window.addEventListener("resize", handleResize);

@@ -11,6 +11,7 @@ export default function Footer({ isActive }: { isActive: boolean }) {
           Get in touch &#10095;
         </p>
       )}
+
       <p
         className={`w-80 h-full font-sans text-7xl/14 ${isActive ? "pt-2 italic" : "pl-4 pt-8"} `}
       >

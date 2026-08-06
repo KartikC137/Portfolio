@@ -6,38 +6,116 @@ import { useEffect, useRef, useState } from "react";
 import { useWindowScale } from "../../hooks/useWindowScale";
 import {
   firstPageStyle,
+  pages,
   pageTransistion,
+  scrollDistances,
   secondPageStyle,
+  sectionsConfig,
   thirdPageStyle,
-} from "../../lib/styles";
+} from "../../lib/data";
 import Lenis from "lenis";
 import Footer from "../Footer";
 import NavigationMenu from "../left-section/NavigationMenu";
+import type { SectionKey } from "../../lib/types";
 
-const pages = ["a", "b", "c"];
-
-type SpeedsObject = { a: number; b: number; c: number };
-
-const scrollDistances: Record<string, SpeedsObject> = {
-  a: { a: -420, b: 1250, c: 2620 },
-  b: { a: -180, b: 1140, c: 2506 },
-  c: { a: -300, b: 1370, c: 2386 },
-};
+const sectionsByPage = Object.entries(sectionsConfig).reduce(
+  (acc, [key, data]) => {
+    if (!acc[data.page]) acc[data.page] = [];
+    acc[data.page].push({ id: key, offset: data.offset });
+    acc[data.page].sort((a, b) => b.offset - a.offset);
+    return acc;
+  },
+  {} as Record<string, { id: string; offset: number }[]>,
+);
 
 export default function MiddleSection() {
+  const scale = useWindowScale();
+
   const pageARef = useRef<HTMLDivElement | null>(null);
   const pageBRef = useRef<HTMLDivElement | null>(null);
   const pageCRef = useRef<HTMLDivElement | null>(null);
   const revealedRef = useRef(false);
 
-  const scale = useWindowScale();
-  const scaleRef = useRef<number>(1);
+  const lenisRef = useRef<Lenis | null>(null);
+  const scaleRef = useRef<number>(scale);
   const scrollRef = useRef<number>(0);
   const activePageRef = useRef<string>("a");
+  const activeSectionRef = useRef<string>("");
 
   const [activePage, setActivePage] = useState<string>("a");
+  const [activeSection, setActiveSection] = useState<SectionKey>("projects");
   const [footerActive, setFooterActive] = useState<boolean>(true);
   const [isAnimatingLayout, setIsAnimatingLayout] = useState<boolean>(false);
+
+  // Init lenis
+  useEffect(() => {
+    const lenis = new Lenis({ autoRaf: true });
+    lenisRef.current = lenis;
+    lenis.on("scroll", ({ scroll }) => {
+      scrollRef.current = scroll;
+      applyTransforms(scroll, activePageRef.current);
+    });
+
+    const syncScrollToPath = () => {
+      const pathname = window.location.pathname;
+      const segments = pathname.split("/").filter(Boolean);
+      const urlSection = segments[segments.length - 1] as SectionKey;
+
+      if (urlSection && sectionsConfig[urlSection]) {
+        const targetPage = sectionsConfig[urlSection].page;
+        const canvasOffset = sectionsConfig[urlSection].offset;
+
+        const maxScroll = 4500 * scaleRef.current - window.innerHeight;
+        const progressPercentage = canvasOffset / 4500;
+        const physicalTarget =
+          maxScroll > 0 ? maxScroll * progressPercentage : 0;
+
+        activeSectionRef.current = urlSection;
+        setActiveSection(urlSection);
+
+        const executeScroll = () => {
+          if (lenisRef.current) {
+            lenisRef.current.scrollTo(physicalTarget + 10, {
+              duration: 1.2,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+          }
+        };
+
+        if (targetPage !== activePageRef.current) {
+          handlePageClick(targetPage);
+          setTimeout(executeScroll, 600);
+        } else {
+          setTimeout(executeScroll, 100);
+        }
+      } else {
+        activeSectionRef.current = "projects";
+        setActiveSection("projects");
+        if (activePageRef.current !== "a") handlePageClick("a");
+        setTimeout(() => lenis.scrollTo(0, { duration: 1.2 }), 100);
+      }
+    };
+
+    syncScrollToPath();
+    window.addEventListener("popstate", syncScrollToPath);
+
+    return () => {
+      window.removeEventListener("popstate", syncScrollToPath);
+      lenis.destroy();
+      lenisRef.current = null;
+    };
+  }, []);
+
+  // Update scale ref
+  useEffect(() => {
+    scaleRef.current = scale;
+  }, [scale]);
+
+  // Update active page ref
+  useEffect(() => {
+    activePageRef.current = activePage;
+    applyTransforms(scrollRef.current, activePage);
+  }, [activePage]);
 
   const setExcludedStyle = (toExclude: string) => {
     pages.forEach(([e]) => {
@@ -55,8 +133,10 @@ export default function MiddleSection() {
   const applyTransforms = (scroll: number, currentPage: string) => {
     const maxScroll = 4500 * scaleRef.current - window.innerHeight;
     const progress = maxScroll > 0 ? Math.min(scroll / maxScroll, 1) : 0;
-    const shouldReveal = progress > 0.98;
+    const normalizedCanvasScroll = progress * 4500;
+    const shouldReveal = progress > 0.99;
     const speeds = scrollDistances[currentPage];
+
     if (pageARef.current)
       pageARef.current.style.transform = `translateY(${progress * speeds.a}px)`;
     if (pageBRef.current)
@@ -64,49 +144,77 @@ export default function MiddleSection() {
     if (pageCRef.current)
       pageCRef.current.style.transform = `translateY(${progress * speeds.c}px)`;
 
+    let currentSection = "";
+    const availableSections = sectionsByPage[currentPage] || [];
+
+    for (const section of availableSections) {
+      if (normalizedCanvasScroll >= section.offset) {
+        currentSection = section.id;
+        break;
+      }
+    }
+
+    if (currentSection !== activeSectionRef.current) {
+      activeSectionRef.current = currentSection;
+      setActiveSection(currentSection as SectionKey);
+      console.log("setting section to", currentSection);
+      window.history.replaceState(null, "", `/${currentSection}`);
+    }
+
     if (revealedRef.current !== shouldReveal) {
       revealedRef.current = shouldReveal;
       setFooterActive(shouldReveal);
     }
   };
 
-  useEffect(() => {
-    scaleRef.current = scale;
-  }, [scale]);
-  useEffect(() => {
-    activePageRef.current = activePage;
-    applyTransforms(scrollRef.current, activePage);
-  }, [activePage]);
-
-  // main pages scroll
-  useEffect(() => {
-    const lenis = new Lenis({ autoRaf: true });
-
-    lenis.on("scroll", ({ scroll }) => {
-      scrollRef.current = scroll;
-      applyTransforms(scroll, activePageRef.current);
-    });
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
   function handlePageClick(page: string) {
-    if (page === activePage) return;
+    if (page === activePageRef.current) return;
     if (!revealedRef.current && footerActive) setFooterActive(false);
     setActivePage(page);
+    activePageRef.current = page;
     setIsAnimatingLayout(true);
     setExcludedStyle(page);
-
     setTimeout(() => {
       setIsAnimatingLayout(false);
     }, 600);
   }
 
+  const handleMenuClick = (targetSection: SectionKey) => {
+    const targetPage = sectionsConfig[targetSection].page;
+    const canvasOffset = sectionsConfig[targetSection].offset;
+
+    const maxScroll = 4500 * scaleRef.current - window.innerHeight;
+    const progressPercentage = canvasOffset / 4500;
+    const physicalTarget = maxScroll > 0 ? maxScroll * progressPercentage : 0;
+
+    window.history.pushState(null, "", `/${targetSection}`);
+
+    activeSectionRef.current = targetSection;
+    setActiveSection(targetSection);
+
+    const executeScroll = () => {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(physicalTarget + 10, {
+          duration: 1.2,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      }
+    };
+
+    if (targetPage !== activePageRef.current) {
+      handlePageClick(targetPage);
+      setTimeout(executeScroll, 600);
+    } else {
+      executeScroll();
+    }
+  };
+
   return (
     <>
-      <NavigationMenu />
+      <NavigationMenu
+        activeSection={activeSection}
+        onSectionClick={handleMenuClick}
+      />
 
       <div
         style={{ height: `${4500 * scale}px` }}
@@ -187,7 +295,7 @@ export default function MiddleSection() {
               <defs>
                 <mask id="b-mask">
                   <rect width="100%" height="100%" fill="white" />
-                  <rect
+                  {/* <rect
                     x="12"
                     y="15"
                     width="552"
@@ -210,7 +318,7 @@ export default function MiddleSection() {
                     height="86"
                     rx="44"
                     fill="black"
-                  />
+                  /> */}
                 </mask>
               </defs>
               <rect className="h-full w-full fill-deg2" mask="url(#b-mask)" />
